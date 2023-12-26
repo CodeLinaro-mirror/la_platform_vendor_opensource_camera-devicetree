@@ -10,3 +10,4 @@ dtbo-y += lahaina-camera-sensor-qrd.dtbo
 dtbo-y += lahaina-camera-sensor-hdk.dtbo
 dtbo-y += lahaina-camera-sensor-hhg.dtbo
 dtbo-y += yupik-camera-sensor-aio-blinkii.dtbo
+dtbo-y += yupik-camera-sensor-iot-360-camera.dtbo
