@@ -1292,7 +1292,15 @@
 					iova-region-start = <0x10400000>;
 					iova-region-len = <0x700000>;
 					iova-region-id = <0x6>;
+					subregion_support;
 					status = "ok";
+					/* Used for HFI queues/sec heap */
+					iova-mem-region-generic-region {
+						iova-region-name = "icp_hfi";
+						iova-region-start = <0x10400000>;
+						iova-region-len = <0x200000>;
+						iova-region-id = <0x0>;
+					};
 				};
 
 				iova-mem-region-io {
@@ -2215,7 +2223,6 @@
 			"qcom,ipe0";
 		num-icp = <1>;
 		num-ipe = <1>;
-		icp_pc_en;
 		icp_use_pil;
 		status = "ok";
 	};
