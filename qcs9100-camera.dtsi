@@ -1372,6 +1372,7 @@
 		operating-points-v2 = <&cdm_cpas_opp_table0>;
 		clock-cntl-level = "svs";
 		cdm-client-names = "ife0";
+		single-context-cdm;
 		status = "ok";
 		cdm_cpas_opp_table0: opp-table {
 			compatible = "operating-points-v2";
@@ -1401,6 +1402,7 @@
 		operating-points-v2 = <&cdm_cpas_opp_table1>;
 		clock-cntl-level = "svs_l1";
 		cdm-client-names = "ife1";
+		single-context-cdm;
 		status = "ok";
 		cdm_cpas_opp_table1: opp-table {
 			compatible = "operating-points-v2";
@@ -1430,6 +1432,7 @@
 		operating-points-v2 = <&cdm_cpas_opp_table2>;
 		clock-cntl-level = "svs_l1";
 		cdm-client-names = "ife2", "ife3", "ife4", "ife5", "ife6";
+		single-context-cdm;
 		status = "ok";
 		cdm_cpas_opp_table2: opp-table {
 			compatible = "operating-points-v2";
@@ -1459,6 +1462,7 @@
 		operating-points-v2 = <&cdm_cpas_opp_table3>;
 		clock-cntl-level = "svs";
 		cdm-client-names = "ife2", "ife3", "ife4", "ife5", "ife6";
+		single-context-cdm;
 		status = "ok";
 		cdm_cpas_opp_table3: opp-table {
 			compatible = "operating-points-v2";
@@ -2679,6 +2683,9 @@
 					<CAM_CPAS_TRANSACTION_WRITE>;
 					constituent-paths =
 					<CAM_CPAS_PATH_DATA_IFE_VID
+					CAM_CPAS_PATH_DATA_IFE_LINEAR
+					CAM_CPAS_PATH_DATA_IFE_STATS
+					CAM_CPAS_PATH_DATA_IFE_PDAF
 					CAM_CPAS_PATH_DATA_IFE_DISP>;
 					parent-node = <&level1_rt_wr1>;
 				};
@@ -2692,6 +2699,9 @@
 					<CAM_CPAS_TRANSACTION_WRITE>;
 					constituent-paths =
 					<CAM_CPAS_PATH_DATA_IFE_VID
+					CAM_CPAS_PATH_DATA_IFE_LINEAR
+					CAM_CPAS_PATH_DATA_IFE_STATS
+					CAM_CPAS_PATH_DATA_IFE_PDAF
 					CAM_CPAS_PATH_DATA_IFE_DISP>;
 					parent-node = <&level1_rt_wr1>;
 				};
@@ -2734,14 +2744,16 @@
 					CAM_CPAS_PATH_DATA_IPE_WR_APP>;
 					parent-node = <&level2_nrt_wr2>;
 				};
-				ipe_0_rd_1: ipe-0-rd-1 {
+				ipe_0_rd_all: ipe-0-rd-all {
 					cell-index = <28>;
-					node-name = "ipe-0-rd-1";
+					node-name = "ipe-0-rd-all";
 					client-name = "ipe0";
-					traffic-data =
-					<CAM_CPAS_PATH_DATA_IPE_RD_REF>;
+					traffic-data = <CAM_CPAS_PATH_DATA_ALL>;
 					traffic-transaction-type =
 					<CAM_CPAS_TRANSACTION_READ>;
+					constituent-paths =
+					<CAM_CPAS_PATH_DATA_IPE_RD_IN
+					CAM_CPAS_PATH_DATA_IPE_RD_REF>;
 					parent-node = <&level2_nrt_rd1>;
 				};
 				rt_cdm0_all_rd_2: rt-cdm0-all-rd-2 {
