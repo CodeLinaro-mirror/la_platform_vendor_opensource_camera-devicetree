@@ -1371,7 +1371,7 @@
 		clock-rates = <300000000 0>;
 		operating-points-v2 = <&cdm_cpas_opp_table0>;
 		clock-cntl-level = "svs";
-		cdm-client-names = "ife0";
+		cdm-client-names = "ife0", "dualife0";
 		single-context-cdm;
 		status = "ok";
 		cdm_cpas_opp_table0: opp-table {
@@ -1401,7 +1401,7 @@
 		clock-rates = <300000000 0>;
 		operating-points-v2 = <&cdm_cpas_opp_table1>;
 		clock-cntl-level = "svs_l1";
-		cdm-client-names = "ife1";
+		cdm-client-names = "ife1", "dualife1";
 		single-context-cdm;
 		status = "ok";
 		cdm_cpas_opp_table1: opp-table {
