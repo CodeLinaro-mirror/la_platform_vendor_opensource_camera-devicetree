@@ -2421,7 +2421,7 @@
 			"rt-cdm3", "icp0", "tpg13", "tpg14", "tpg15";
 
 		status = "ok";
-
+		enable-secure-qos-update;
 		cpas_opp_table: opp-table {
 			compatible = "operating-points-v2";
 
