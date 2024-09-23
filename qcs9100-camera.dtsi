@@ -913,7 +913,7 @@
 			hw-thd-dat = <22>;
 			hw-thd-sta = <35>;
 			hw-tbuf = <62>;
-			hw-scl-stretch-en = <0>;
+			hw-scl-stretch-en = <1>;
 			hw-trdhld = <6>;
 			hw-tsp = <3>;
 			cci-clk-src = <37500000>;
@@ -1008,7 +1008,7 @@
 			hw-thd-dat = <22>;
 			hw-thd-sta = <35>;
 			hw-tbuf = <62>;
-			hw-scl-stretch-en = <0>;
+			hw-scl-stretch-en = <1>;
 			hw-trdhld = <6>;
 			hw-tsp = <3>;
 			cci-clk-src = <37500000>;
@@ -1053,7 +1053,7 @@
 		reg-names = "cci";
 		reg-cam-base = <0x15000>;
 		interrupt-names = "CCI2";
-		interrupts = <GIC_SPI 652 IRQ_TYPE_EDGE_RISING>;
+		interrupts = <GIC_SPI 651 IRQ_TYPE_EDGE_RISING>;
 		operating-points-v2 = <&cci2_opp_table>;
 		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		clock-names = "cci_2_clk_src",
@@ -1103,7 +1103,7 @@
 			hw-thd-dat = <22>;
 			hw-thd-sta = <35>;
 			hw-tbuf = <62>;
-			hw-scl-stretch-en = <0>;
+			hw-scl-stretch-en = <1>;
 			hw-trdhld = <6>;
 			hw-tsp = <3>;
 			cci-clk-src = <37500000>;
@@ -1148,7 +1148,7 @@
 		reg-names = "cci";
 		reg-cam-base = <0x16000>;
 		interrupt-names = "CCI3";
-		interrupts = <GIC_SPI 772 IRQ_TYPE_EDGE_RISING>;
+		interrupts = <GIC_SPI 771 IRQ_TYPE_EDGE_RISING>;
 		operating-points-v2 = <&cci3_opp_table>;
 		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		clock-names = "cci_3_clk_src",
@@ -1198,7 +1198,7 @@
 			hw-thd-dat = <22>;
 			hw-thd-sta = <35>;
 			hw-tbuf = <62>;
-			hw-scl-stretch-en = <0>;
+			hw-scl-stretch-en = <1>;
 			hw-trdhld = <6>;
 			hw-tsp = <3>;
 			cci-clk-src = <37500000>;
