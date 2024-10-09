@@ -11,5 +11,5 @@
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/power/qcom-rpmpd.h>
 
-#include "qcm6490-camera-idp.dtsi"
+#include "qcm6490-camera.dtsi"
 #include "qcm6490-camera-sensor-idp.dtsi"
