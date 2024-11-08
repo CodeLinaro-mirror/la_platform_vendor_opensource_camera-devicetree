@@ -597,8 +597,8 @@
 		status = "disabled";
 	};
 
-	cam_csiphy_tpg13: qcom,tpg13@acac000 {
-		cell-index = <13>;
+	cam_csiphy_tpg17: qcom,tpg17@acac000 {
+		cell-index = <17>;
 		phy-id = <0>;
 		compatible = "qcom,cam-tpg1031";
 		reg-names = "tpg0", "cam_cpas_top";
@@ -630,8 +630,8 @@
 		};
 	};
 
-	cam_csiphy_tpg14: qcom,tpg14@acad000 {
-		cell-index = <14>;
+	cam_csiphy_tpg18: qcom,tpg18@acad000 {
+		cell-index = <18>;
 		phy-id = <1>;
 		compatible = "qcom,cam-tpg1031";
 		reg-names = "tpg1", "cam_cpas_top";
@@ -663,8 +663,8 @@
 		};
 	};
 
-	cam_csiphy_tpg15: qcom,tpg15@acae000 {
-		cell-index = <15>;
+	cam_csiphy_tpg19: qcom,tpg19@acae000 {
+		cell-index = <19>;
 		phy-id = <2>;
 		compatible = "qcom,cam-tpg1031";
 		reg-names = "tpg2", "cam_cpas_top";
@@ -2418,7 +2418,7 @@
 			"ife0", "ife1",	"ife2", "ife3", "ife4",
 			"ife5",	"ife6", "ipe0", "sfe0", "sfe1",
 			"cam-cdm-intf0", "rt-cdm0", "rt-cdm1", "rt-cdm2",
-			"rt-cdm3", "icp0", "tpg13", "tpg14", "tpg15";
+			"rt-cdm3", "icp0", "tpg17", "tpg18", "tpg19";
 
 		status = "ok";
 		enable-secure-qos-update;
