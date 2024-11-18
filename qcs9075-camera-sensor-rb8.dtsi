@@ -15,7 +15,7 @@
 
 	/*cam0a-ov9282*/
 	qcom,cam-sensor1 {
-		cell-index = <1>;
+		cell-index = <20>;
 		compatible = "qcom,cam-sensor";
 		csiphy-sd-index = <0>;
 		sensor-position-roll = <0>;
@@ -35,15 +35,16 @@
 		                &cam_sensor_active_rst0>;
 		pinctrl-1 = <&cam_sensor_mclk0_suspend
 		                &cam_sensor_suspend_rst0>;
-		gpios = <&pmm8654au_0_gpios 7 0>,
-			<&tlmm 72 0>,
-			<&tlmm 132 0>;
+		gpios = <&tlmm 72 0>,
+			<&tlmm 132 0>,
+			<&pmm8654au_0_gpios 7 0>;
 		gpio-reset = <1>;
+		gpio-custom1 = <2>;
 		gpio-req-tbl-num = <0 1 2>;
 		gpio-req-tbl-flags   	 = <1 0 0>;
-		gpio-req-tbl-label = "CUSTOM_GPIO1",
-		                       "CAMIF_MCLK0",
-		                         "CAM_RESET0";
+		gpio-req-tbl-label = "CAM_MCLK0",
+		                       "CAMIF_RESET0",
+		                         "CAM_CUSTOM1";
 		cci-master = <0>;
 		clocks = <&camcc CAM_CC_MCLK0_CLK>;
 		clock-names = "cam_clk";

@@ -942,7 +942,7 @@
 			hw-thd-dat = <22>;
 			hw-thd-sta = <35>;
 			hw-tbuf = <62>;
-			hw-scl-stretch-en = <1>;
+			hw-scl-stretch-en = <0>;
 			hw-trdhld = <6>;
 			hw-tsp = <3>;
 			cci-clk-src = <37500000>;
@@ -1037,7 +1037,7 @@
 			hw-thd-dat = <22>;
 			hw-thd-sta = <35>;
 			hw-tbuf = <62>;
-			hw-scl-stretch-en = <1>;
+			hw-scl-stretch-en = <0>;
 			hw-trdhld = <6>;
 			hw-tsp = <3>;
 			cci-clk-src = <37500000>;
@@ -1082,7 +1082,7 @@
 		reg-names = "cci";
 		reg-cam-base = <0x15000>;
 		interrupt-names = "CCI2";
-		interrupts = <GIC_SPI 651 IRQ_TYPE_EDGE_RISING>;
+		interrupts = <GIC_SPI 652 IRQ_TYPE_EDGE_RISING>;
 		operating-points-v2 = <&cci2_opp_table>;
 		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		clock-names = "cci_2_clk_src",
@@ -1132,7 +1132,7 @@
 			hw-thd-dat = <22>;
 			hw-thd-sta = <35>;
 			hw-tbuf = <62>;
-			hw-scl-stretch-en = <1>;
+			hw-scl-stretch-en = <0>;
 			hw-trdhld = <6>;
 			hw-tsp = <3>;
 			cci-clk-src = <37500000>;
@@ -1177,7 +1177,7 @@
 		reg-names = "cci";
 		reg-cam-base = <0x16000>;
 		interrupt-names = "CCI3";
-		interrupts = <GIC_SPI 771 IRQ_TYPE_EDGE_RISING>;
+		interrupts = <GIC_SPI 772 IRQ_TYPE_EDGE_RISING>;
 		operating-points-v2 = <&cci3_opp_table>;
 		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		clock-names = "cci_3_clk_src",
@@ -1227,7 +1227,7 @@
 			hw-thd-dat = <22>;
 			hw-thd-sta = <35>;
 			hw-tbuf = <62>;
-			hw-scl-stretch-en = <1>;
+			hw-scl-stretch-en = <0>;
 			hw-trdhld = <6>;
 			hw-tsp = <3>;
 			cci-clk-src = <37500000>;
@@ -1534,9 +1534,9 @@
 		clocks =
 			<&camcc CAM_CC_CSID_CLK_SRC>,
 			<&camcc CAM_CC_CSID_CLK>,
-			<&camcc CAM_CC_CSID_CSIPHY_RX_CLK>;
+			<&camcc CAM_CC_CPHY_RX_CLK_SRC>;
 		clock-rates =
-			<400000000 0 0>;
+			<400000000 0 400000000>;
 		clock-cntl-level = "svs_l1";
 		src-clock-name = "cam_cc_csid_clk_src";
 		operating-points-v2 = <&csid0_opp_table>;
@@ -1615,9 +1615,9 @@
 		clocks =
 			<&camcc CAM_CC_CSID_CLK_SRC>,
 			<&camcc CAM_CC_CSID_CLK>,
-			<&camcc CAM_CC_CSID_CSIPHY_RX_CLK>;
+			<&camcc CAM_CC_CPHY_RX_CLK_SRC>;
 		clock-rates =
-			<400000000 0 0>;
+			<400000000 0 400000000>;
 		clock-cntl-level = "svs_l1";
 		src-clock-name = "cam_cc_csid_clk_src";
 		operating-points-v2 = <&csid1_opp_table>;
