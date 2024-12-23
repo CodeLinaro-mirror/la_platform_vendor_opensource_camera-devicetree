@@ -11,5 +11,5 @@
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/power/qcom-rpmpd.h>
 
-#include "sa8775p-camera.dtsi"
+#include "qcs9100-camera.dtsi"
 #include "qcs9100-camera-sensor-idp.dtsi"
