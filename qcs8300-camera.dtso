@@ -12,3 +12,4 @@
 #include <dt-bindings/power/qcom-rpmpd.h>
 
 #include "qcs8300-camera.dtsi"
+#include "qcs8300-camera-sensor-idp.dtsi"
