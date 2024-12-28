@@ -561,13 +561,13 @@
 		reg-cam-base = <0x9c000>;
 		interrupt-names = "CSIPHY0";
 		interrupts = <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>;
-		csi-vdd-1p2-supply = <&vreg_l1c>;
+		csi-vdd-1p2-supply = <&vreg_l5a>;
 		csi-vdd-0p9-supply = <&vreg_l4a>;
 		regulator-names = "csi-vdd-1p2", "csi-vdd-0p9";
 		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		rgltr-cntrl-support;
-		rgltr-min-voltage = <1140000 831000>;
-		rgltr-max-voltage = <1260000 920000>;
+		rgltr-min-voltage = <1200000 880000>;
+		rgltr-max-voltage = <1200000 912000>;
 		rgltr-load-current = <8900 15900>;
 		shared-clks = <1 0 0 0>;
 		clock-names = "cphy_rx_clk_src",
@@ -601,13 +601,13 @@
 		reg-cam-base = <0x9e000>;
 		interrupt-names = "CSIPHY1";
 		interrupts = <GIC_SPI 478 IRQ_TYPE_EDGE_RISING>;
-		csi-vdd-1p2-supply = <&vreg_l1c>;
+		csi-vdd-1p2-supply = <&vreg_l5a>;
 		csi-vdd-0p9-supply = <&vreg_l4a>;
 		regulator-names = "csi-vdd-1p2", "csi-vdd-0p9";
 		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		rgltr-cntrl-support;
-		rgltr-min-voltage = <1140000 831000>;
-		rgltr-max-voltage = <1260000 920000>;
+		rgltr-min-voltage = <1200000 880000>;
+		rgltr-max-voltage = <1200000 912000>;
 		rgltr-load-current = <8900 15900>;
 		shared-clks = <1 0 0 0>;
 		clock-names = "cphy_rx_clk_src",
@@ -641,13 +641,13 @@
 		reg-cam-base = <0xa0000>;
 		interrupt-names = "CSIPHY2";
 		interrupts = <GIC_SPI 479 IRQ_TYPE_EDGE_RISING>;
-		csi-vdd-1p2-supply = <&vreg_l1c>;
+		csi-vdd-1p2-supply = <&vreg_l5a>;
 		csi-vdd-0p9-supply = <&vreg_l4a>;
 		regulator-names = "csi-vdd-1p2", "csi-vdd-0p9";
 		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		rgltr-cntrl-support;
-		rgltr-min-voltage = <1140000 831000>;
-		rgltr-max-voltage = <1260000 920000>;
+		rgltr-min-voltage = <1200000 880000>;
+		rgltr-max-voltage = <1200000 912000>;
 		rgltr-load-current = <8900 15900>;
 		shared-clks = <1 0 0 0>;
 		clock-names = "cphy_rx_clk_src",
