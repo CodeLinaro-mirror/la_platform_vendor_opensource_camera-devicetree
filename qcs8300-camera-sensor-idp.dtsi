@@ -8,6 +8,7 @@
 	qcom,cam-res-mgr {
 		compatible = "qcom,cam-res-mgr";
 		status = "ok";
+		gpios-shared = <518 519 520 521>;
 	};
 };
 
