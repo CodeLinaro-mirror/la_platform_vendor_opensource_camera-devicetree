@@ -1,0 +1,22 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/clock/qcom,camcc-sc7280.h>
+#include <dt-bindings/clock/qcom,gcc-sc7280.h>
+#include <dt-bindings/interconnect/qcom,yupik.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
+
+#include "yupik-camera-sensor-idp.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Katmai FP2 IOT HSP + PM7250B";
+        compatible = "qcom,yupik-iot-idp", "qcom,yupik-iot", "qcom,idp";
+        qcom,msm-id = <497 0x10000>, <575 0x10000>, <576 0x10000>;
+        qcom,board-id = <34 1>;
+};

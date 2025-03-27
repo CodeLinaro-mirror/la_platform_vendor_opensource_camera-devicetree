@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
+
 #include <dt-bindings/msm-camera.h>
 
 &tlmm {
@@ -475,22 +476,21 @@
 	cam_csiphy0: qcom,csiphy0 {
 		cell-index = <0>;
 		compatible = "qcom,csiphy-v1.2.1", "qcom,csiphy";
-		reg = <0x0 0x0ace0000 0x0 0x2000>;
+		reg = <0x0ace0000 0x2000>;
 		reg-names = "csiphy";
 		reg-cam-base = <0xe0000>;
 		interrupts = <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>;
 		interrupt-names = "csiphy0";
-		operating-points-v2 = <&csiphy0_opp_table>;
+		gdscr-supply = <&cam_cc_titan_top_gdsc>;
 		refgen-supply = <&refgen>;
-		csi-vdd-1p2-supply = <&vreg_l6b_1p2>;
-		csi-vdd-0p9-supply = <&vreg_l10c_0p88>;
-		regulator-names = "refgen", "csi-vdd-1p2",
+		csi-vdd-1p2-supply = <&L6B>;
+		csi-vdd-0p9-supply = <&L10C>;
+		regulator-names = "gdscr", "refgen", "csi-vdd-1p2",
 			"csi-vdd-0p9";
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		rgltr-cntrl-support;
-		rgltr-min-voltage = <0 1200000 880000>;
-		rgltr-max-voltage = <0 1260000 1050000>;
-		rgltr-load-current = <0 54000 96400>;
+		rgltr-min-voltage = <0 0 1200000 880000>;
+		rgltr-max-voltage = <0 0 1260000 1050000>;
+		rgltr-load-current = <0 0 54000 96400>;
 		clocks = <&camcc CAM_CC_CPHY_RX_CLK_SRC>,
 			<&camcc CAM_CC_CSIPHY0_CLK>,
 			<&camcc CAM_CC_CSI0PHYTIMER_CLK_SRC>,
@@ -505,39 +505,26 @@
 			<300000000 0 300000000 0>,
 			<400000000 0 300000000 0>;
 		status = "ok";
-		csiphy0_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-300000000 {
-				opp-hz = /bits/ 64 <300000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-		};
 	};
 
 	cam_csiphy1: qcom,csiphy1 {
 		cell-index = <1>;
 		compatible = "qcom,csiphy-v1.2.1", "qcom,csiphy";
-		reg = <0x0 0xace2000 0x0 0x2000>;
+		reg = <0xace2000 0x2000>;
 		reg-names = "csiphy";
 		reg-cam-base = <0xe2000>;
 		interrupts = <GIC_SPI 478 IRQ_TYPE_EDGE_RISING>;
 		interrupt-names = "csiphy1";
-		operating-points-v2 = <&csiphy1_opp_table>;
+		gdscr-supply = <&cam_cc_titan_top_gdsc>;
 		refgen-supply = <&refgen>;
-		csi-vdd-1p2-supply = <&vreg_l6b_1p2>;
-		csi-vdd-0p9-supply = <&vreg_l10c_0p88>;
-		regulator-names = "refgen", "csi-vdd-1p2",
+		csi-vdd-1p2-supply = <&L6B>;
+		csi-vdd-0p9-supply = <&L10C>;
+		regulator-names = "gdscr", "refgen", "csi-vdd-1p2",
 			"csi-vdd-0p9";
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		rgltr-cntrl-support;
-		rgltr-min-voltage = <0 1200000 880000>;
-		rgltr-max-voltage = <0 1260000 1050000>;
-		rgltr-load-current = <0 54000 96400>;
+		rgltr-min-voltage = <0 0 1200000 880000>;
+		rgltr-max-voltage = <0 0 1260000 1050000>;
+		rgltr-load-current = <0 0 54000 96400>;
 		clocks = <&camcc CAM_CC_CPHY_RX_CLK_SRC>,
 			<&camcc CAM_CC_CSIPHY1_CLK>,
 			<&camcc CAM_CC_CSI1PHYTIMER_CLK_SRC>,
@@ -552,39 +539,26 @@
 			<300000000 0 300000000 0>,
 			<400000000 0 300000000 0>;
 		status = "ok";
-		csiphy1_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-300000000 {
-				opp-hz = /bits/ 64 <300000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-		};
 	};
 
 	cam_csiphy2: qcom,csiphy2 {
 		cell-index = <2>;
 		compatible = "qcom,csiphy-v1.2.1", "qcom,csiphy";
-		reg = <0x0 0xace4000 0x0 0x2000>;
+		reg = <0xace4000 0x2000>;
 		reg-names = "csiphy";
 		reg-cam-base = <0xe4000>;
 		interrupts = <GIC_SPI 479 IRQ_TYPE_EDGE_RISING>;
 		interrupt-names = "csiphy2";
+		gdscr-supply = <&cam_cc_titan_top_gdsc>;
 		refgen-supply = <&refgen>;
-		operating-points-v2 = <&csiphy2_opp_table>;
-		csi-vdd-1p2-supply = <&vreg_l6b_1p2>;
-		csi-vdd-0p9-supply = <&vreg_l10c_0p88>;
-		regulator-names = "refgen", "csi-vdd-1p2",
+		csi-vdd-1p2-supply = <&L6B>;
+		csi-vdd-0p9-supply = <&L10C>;
+		regulator-names = "gdscr", "refgen", "csi-vdd-1p2",
 			"csi-vdd-0p9";
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		rgltr-cntrl-support;
-		rgltr-min-voltage = <0 1200000 880000>;
-		rgltr-max-voltage = <0 1260000 1050000>;
-		rgltr-load-current = <0 54000 96400>;
+		rgltr-min-voltage = <0 0 1200000 880000>;
+		rgltr-max-voltage = <0 0 1260000 1050000>;
+		rgltr-load-current = <0 0 54000 96400>;
 		clocks = <&camcc CAM_CC_CPHY_RX_CLK_SRC>,
 			<&camcc CAM_CC_CSIPHY2_CLK>,
 			<&camcc CAM_CC_CSI2PHYTIMER_CLK_SRC>,
@@ -599,39 +573,26 @@
 			<300000000 0 300000000 0>,
 			<400000000 0 300000000 0>;
 		status = "ok";
-		csiphy2_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-300000000 {
-				opp-hz = /bits/ 64 <300000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-		};
 	};
 
 	cam_csiphy3: qcom,csiphy3 {
 		cell-index = <3>;
 		compatible = "qcom,csiphy-v1.2.1", "qcom,csiphy";
-		reg = <0x0 0xace6000 0x0 0x2000>;
+		reg = <0xace6000 0x2000>;
 		reg-names = "csiphy";
 		reg-cam-base = <0xe6000>;
 		interrupts = <GIC_SPI 448 IRQ_TYPE_EDGE_RISING>;
 		interrupt-names = "csiphy3";
+		gdscr-supply = <&cam_cc_titan_top_gdsc>;
 		refgen-supply = <&refgen>;
-		operating-points-v2 = <&csiphy3_opp_table>;
-		csi-vdd-1p2-supply = <&vreg_l6b_1p2>;
-		csi-vdd-0p9-supply = <&vreg_l10c_0p88>;
-		regulator-names = "refgen", "csi-vdd-1p2",
+		csi-vdd-1p2-supply = <&L6B>;
+		csi-vdd-0p9-supply = <&L10C>;
+		regulator-names = "gdscr", "refgen", "csi-vdd-1p2",
 			"csi-vdd-0p9";
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		rgltr-cntrl-support;
-		rgltr-min-voltage = <0 1200000 880000>;
-		rgltr-max-voltage = <0 1260000 1050000>;
-		rgltr-load-current = <0 54000 96400>;
+		rgltr-min-voltage = <0 0 1200000 880000>;
+		rgltr-max-voltage = <0 0 1260000 1050000>;
+		rgltr-load-current = <0 0 54000 96400>;
 		clocks = <&camcc CAM_CC_CPHY_RX_CLK_SRC>,
 			<&camcc CAM_CC_CSIPHY3_CLK>,
 			<&camcc CAM_CC_CSI3PHYTIMER_CLK_SRC>,
@@ -646,39 +607,26 @@
 			<300000000 0 300000000 0>,
 			<400000000 0 300000000 0>;
 		status = "ok";
-		csiphy3_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-300000000 {
-				opp-hz = /bits/ 64 <300000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-		};
 	};
 
 	cam_csiphy4: qcom,csiphy4 {
 		cell-index = <4>;
 		compatible = "qcom,csiphy-v1.2.1", "qcom,csiphy";
-		reg = <0x0 0xace8000 0x0 0x2000>;
+		reg = <0xace8000 0x2000>;
 		reg-names = "csiphy";
 		reg-cam-base = <0xe8000>;
 		interrupts = <GIC_SPI 122 IRQ_TYPE_EDGE_RISING>;
 		interrupt-names = "csiphy4";
+		gdscr-supply = <&cam_cc_titan_top_gdsc>;
 		refgen-supply = <&refgen>;
-		operating-points-v2 = <&csiphy4_opp_table>;
-		csi-vdd-1p2-supply = <&vreg_l6b_1p2>;
-		csi-vdd-0p9-supply = <&vreg_l10c_0p88>;
-		regulator-names = "refgen", "csi-vdd-1p2",
+		csi-vdd-1p2-supply = <&L6B>;
+		csi-vdd-0p9-supply = <&L10C>;
+		regulator-names = "gdscr", "refgen", "csi-vdd-1p2",
 			"csi-vdd-0p9";
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
 		rgltr-cntrl-support;
-		rgltr-min-voltage = <0 1200000 880000>;
-		rgltr-max-voltage = <0 1260000 1050000>;
-		rgltr-load-current = <0 54000 96400>;
+		rgltr-min-voltage = <0 0 1200000 880000>;
+		rgltr-max-voltage = <0 0 1260000 1050000>;
+		rgltr-load-current = <0 0 54000 96400>;
 		clocks = <&camcc CAM_CC_CPHY_RX_CLK_SRC>,
 			<&camcc CAM_CC_CSIPHY4_CLK>,
 			<&camcc CAM_CC_CSI4PHYTIMER_CLK_SRC>,
@@ -693,31 +641,19 @@
 			<300000000 0 300000000 0>,
 			<400000000 0 300000000 0>;
 		status = "ok";
-		csiphy4_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-300000000 {
-				opp-hz = /bits/ 64 <300000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-		};
 	};
 
 	cam_cci0: qcom,cci0 {
 		cell-index = <0>;
 		compatible = "qcom,cci", "simple-bus";
-		reg = <0x0 0xac4a000 0x0 0x1000>;
+		reg = <0xac4a000 0x1000>;
 		reg-names = "cci";
 		reg-cam-base = <0x4a000>;
 		interrupt-names = "cci";
 		interrupts = <GIC_SPI 460 IRQ_TYPE_EDGE_RISING>;
 		status = "ok";
-		operating-points-v2 = <&cci0_opp_table>;
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		gdscr-supply = <&cam_cc_titan_top_gdsc>;
+		regulator-names = "gdscr";
 		clocks = <&camcc CAM_CC_CCI_0_CLK_SRC>,
 			<&camcc CAM_CC_CCI_0_CLK>;
 		clock-names = "cci_0_clk_src",
@@ -738,14 +674,6 @@
 					"CCI_I2C_CLK0",
 					"CCI_I2C_DATA1",
 					"CCI_I2C_CLK1";
-		cci0_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-37500000 {
-				opp-hz = /bits/ 64 <37500000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-		};
 
 		i2c_freq_100Khz_cci0: qcom,i2c_standard_mode {
 			hw-thigh = <201>;
@@ -811,14 +739,14 @@
 	cam_cci1: qcom,cci1 {
 		cell-index = <1>;
 		compatible = "qcom,cci", "simple-bus";
-		reg = <0x0 0xac4b000 0x0 0x1000>;
+		reg = <0xac4b000 0x1000>;
 		reg-names = "cci";
 		reg-cam-base = <0x4b000>;
 		interrupt-names = "cci";
 		interrupts = <GIC_SPI 271 IRQ_TYPE_EDGE_RISING>;
 		status = "ok";
-		operating-points-v2 = <&cci1_opp_table>;
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		gdscr-supply = <&cam_cc_titan_top_gdsc>;
+		regulator-names = "gdscr";
 		clocks = <&camcc CAM_CC_CCI_1_CLK_SRC>,
 			<&camcc CAM_CC_CCI_1_CLK>;
 		clock-names = "cci_1_clk_src",
@@ -839,14 +767,6 @@
 					"CCI_I2C_CLK2",
 					"CCI_I2C_DATA3",
 					"CCI_I2C_CLK3";
-		cci1_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-37500000 {
-				opp-hz = /bits/ 64 <37500000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-		};
 
 		i2c_freq_100Khz_cci1: qcom,i2c_standard_mode {
 			hw-thigh = <201>;
@@ -968,7 +888,7 @@
 		msm_cam_icp_fw {
 			compatible = "qcom,msm-cam-smmu-fw-dev";
 			label="icp";
-			memory-region = <&camera_mem>;
+			memory-region = <&pil_camera_mem>;
 		};
 
 		msm_cam_smmu_icp {
@@ -1096,30 +1016,22 @@
 		cell-index = <0>;
 		compatible = "qcom,cam170-cpas-cdm0";
 		label = "cpas-cdm";
-		reg = <0x0 0xac48000 0x0 0x1000>;
+		reg = <0xac48000 0x1000>;
 		reg-names = "cpas-cdm";
 		reg-cam-base = <0x48000>;
 		interrupts = <GIC_SPI 461 IRQ_TYPE_EDGE_RISING>;
 		interrupt-names = "cpas-cdm";
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
-		clock-names = "cam_cc_slow_ahb_clk_src",
+		regulator-names = "camss";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
+		clock-names = "cam_cc_cpas_slow_ahb_clk",
 			"cam_cc_cpas_ahb_clk";
 		clocks = <&camcc CAM_CC_SLOW_AHB_CLK_SRC>,
 			<&camcc CAM_CC_CPAS_AHB_CLK>;
-		src-clock-name = "cam_cc_slow_ahb_clk_src";
-		clock-rates = <80000000 0>;
-		operating-points-v2 = <&cdm_cpas_opp_table>;
+		clock-rates = <0 0>;
 		clock-cntl-level = "svs";
 		cdm-client-names = "ife0", "ife1", "ife2",
 				   "ife3", "ife4", "dualife";
 		status = "ok";
-		cdm_cpas_opp_table: opp-table {
-			compatible = "operating-points-v2";
-			opp-80000000 {
-				opp-hz = /bits/ 64 <80000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-		};
 	};
 
 	qcom,cam-isp {
@@ -1132,11 +1044,13 @@
 		cell-index = <0>;
 		compatible = "qcom,csid165_204";
 		reg-names = "csid";
-		reg = <0x0 0xacb3000 0x0 0x1000>;
+		reg = <0xacb3000 0x1000>;
 		reg-cam-base = <0xb3000>;
 		interrupt-names = "csid0";
 		interrupts = <GIC_SPI 464 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_IFE_0_GDSC>;
+		regulator-names = "camss", "ife0";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
+		ife0-supply = <&cam_cc_ife_0_gdsc>;
 		clock-names =
 			"ife_csid_clk_src",
 			"ife_csid_clk",
@@ -1158,42 +1072,21 @@
 			<400000000 0 0 760000000 0 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "ife_csid_clk_src";
-
-		operating-points-v2 = <&csid0_opp_table>;
-
 		clock-control-debugfs = "true";
 		status = "ok";
-		csid0_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-380000000 {
-				opp-hz = /bits/ 64 <380000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-510000000 {
-				opp-hz = /bits/ 64 <510000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-637000000 {
-				opp-hz = /bits/ 64 <637000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-760000000 {
-				opp-hz = /bits/ 64 <760000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_vfe0: qcom,vfe0 {
 		cell-index = <0>;
 		compatible = "qcom,vfe165_160";
 		reg-names = "ife";
-		reg = <0x0 0xacaf000 0x0 0x5200>;
+		reg = <0xacaf000 0x5200>;
 		reg-cam-base = <0xaf000>;
 		interrupt-names = "ife0";
 		interrupts = <GIC_SPI 465 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_IFE_0_GDSC>;
+		regulator-names = "camss", "ife0";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
+		ife0-supply = <&cam_cc_ife_0_gdsc>;
 		clock-names =
 			"ife_clk_src",
 			"ife_clk",
@@ -1209,45 +1102,25 @@
 			<760000000 0 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "ife_clk_src";
-
-		operating-points-v2 = <&vfe0_opp_table>;
 		clock-control-debugfs = "true";
 		clock-names-option =  "ife_dsp_clk";
 		clocks-option = <&camcc CAM_CC_IFE_0_DSP_CLK>;
 		clock-rates-option = <760000000>;
 		cam_hw_pid = <24 8>;
 		status = "ok";
-		vfe0_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-380000000 {
-				opp-hz = /bits/ 64 <380000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-510000000 {
-				opp-hz = /bits/ 64 <510000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-637000000 {
-				opp-hz = /bits/ 64 <637000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-760000000 {
-				opp-hz = /bits/ 64 <760000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_csid1: qcom,csid1 {
 		cell-index = <1>;
 		compatible = "qcom,csid165_204";
 		reg-names = "csid";
-		reg = <0x0 0xacba000 0x0 0x1000>;
+		reg = <0xacba000 0x1000>;
 		reg-cam-base = <0xba000>;
 		interrupt-names = "csid1";
 		interrupts = <GIC_SPI 466 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_IFE_1_GDSC>;
+		regulator-names = "camss", "ife1";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
+		ife1-supply = <&cam_cc_ife_1_gdsc>;
 		clock-names =
 			"ife_csid_clk_src",
 			"ife_csid_clk",
@@ -1269,42 +1142,21 @@
 			<400000000 0 0 760000000 0 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "ife_csid_clk_src";
-
-		operating-points-v2 = <&csid1_opp_table>;
-
 		clock-control-debugfs = "true";
 		status = "ok";
-		csid1_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-380000000 {
-				opp-hz = /bits/ 64 <380000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-510000000 {
-				opp-hz = /bits/ 64 <510000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-637000000 {
-				opp-hz = /bits/ 64 <637000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-760000000 {
-				opp-hz = /bits/ 64 <760000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_vfe1: qcom,vfe1 {
 		cell-index = <1>;
 		compatible = "qcom,vfe165_160";
 		reg-names = "ife";
-		reg = <0x0 0xacb6000 0x0 0x5200>;
+		reg = <0xacb6000 0x5200>;
 		reg-cam-base = <0xb6000>;
 		interrupt-names = "ife1";
 		interrupts = <GIC_SPI 467 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_IFE_1_GDSC>;
+		regulator-names = "camss", "ife1";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
+		ife1-supply = <&cam_cc_ife_1_gdsc>;
 		clock-names =
 			"ife_clk_src",
 			"ife_clk",
@@ -1320,45 +1172,25 @@
 			<760000000 0 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "ife_clk_src";
-		operating-points-v2 = <&vfe1_opp_table>;
-
 		clock-control-debugfs = "true";
 		clock-names-option =  "ife_dsp_clk";
 		clocks-option = <&camcc CAM_CC_IFE_1_DSP_CLK>;
 		clock-rates-option = <760000000>;
 		cam_hw_pid = <25 9>;
 		status = "ok";
-		vfe1_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-380000000 {
-				opp-hz = /bits/ 64 <380000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-510000000 {
-				opp-hz = /bits/ 64 <510000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-637000000 {
-				opp-hz = /bits/ 64 <637000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-760000000 {
-				opp-hz = /bits/ 64 <760000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_csid2: qcom,csid2 {
 		cell-index = <2>;
 		compatible = "qcom,csid165_204";
 		reg-names = "csid";
-		reg = <0x0 0x0acc1000 0x0 0x1000>;
+		reg = <0x0acc1000 0x1000>;
 		reg-cam-base = <0xc1000>;
 		interrupt-names = "csid2";
 		interrupts = <GIC_SPI 640 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_IFE_2_GDSC>;
+		regulator-names = "camss", "ife2";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
+		ife2-supply = <&cam_cc_ife_2_gdsc>;
 		clock-names =
 			"ife_csid_clk_src",
 			"ife_csid_clk",
@@ -1380,41 +1212,21 @@
 			<400000000 0 0 760000000 0 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "ife_csid_clk_src";
-		operating-points-v2 = <&csid2_opp_table>;
-
 		clock-control-debugfs = "true";
 		status = "ok";
-		csid2_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-380000000 {
-				opp-hz = /bits/ 64 <380000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-510000000 {
-				opp-hz = /bits/ 64 <510000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-637000000 {
-				opp-hz = /bits/ 64 <637000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-760000000 {
-				opp-hz = /bits/ 64 <760000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_vfe2: qcom,vfe2 {
 		cell-index = <2>;
 		compatible = "qcom,vfe165_160";
 		reg-names = "ife";
-		reg = <0x0 0x0acbd000 0x0 0x5200>;
+		reg = <0x0acbd000 0x5200>;
 		reg-cam-base = <0xbd000>;
 		interrupt-names = "ife2";
 		interrupts = <GIC_SPI 641 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_IFE_2_GDSC>;
+		regulator-names = "camss", "ife2";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
+		ife2-supply = <&cam_cc_ife_2_gdsc>;
 		clock-names =
 			"ife_clk_src",
 			"ife_clk",
@@ -1430,45 +1242,24 @@
 			<760000000 0 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "ife_clk_src";
-		operating-points-v2 = <&vfe2_opp_table>;
-
 		clock-control-debugfs = "true";
 		clock-names-option =  "ife_dsp_clk";
 		clocks-option = <&camcc CAM_CC_IFE_2_DSP_CLK>;
 		clock-rates-option = <760000000>;
 		cam_hw_pid = <3 10>;
 		status = "ok";
-		vfe2_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-380000000 {
-				opp-hz = /bits/ 64 <380000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-510000000 {
-				opp-hz = /bits/ 64 <510000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-637000000 {
-				opp-hz = /bits/ 64 <637000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-760000000 {
-				opp-hz = /bits/ 64 <760000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_csid_lite0: qcom,csid-lite0 {
 		cell-index = <3>;
 		compatible = "qcom,csid-lite165";
 		reg-names = "csid-lite";
-		reg = <0x0 0xacc8000 0x0 0x1000>;
+		reg = <0xacc8000 0x1000>;
 		reg-cam-base = <0xc8000>;
 		interrupt-names = "csid-lite0";
 		interrupts = <GIC_SPI 468 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		regulator-names = "camss";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
 		clock-names =
 			"ife_csid_clk_src",
 			"ife_csid_clk",
@@ -1488,41 +1279,20 @@
 			<400000000 0 0 600000000 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "ife_csid_clk_src";
-		operating-points-v2 = <&csid_lite0_opp_table>;
-
 		clock-control-debugfs = "true";
 		status = "ok";
-		csid_lite0_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-320000000 {
-				opp-hz = /bits/ 64 <320000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-480000000 {
-				opp-hz = /bits/ 64 <480000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-600000000 {
-				opp-hz = /bits/ 64 <600000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_vfe_lite0: qcom,vfe-lite0 {
 		cell-index = <3>;
 		compatible = "qcom,vfe-lite165";
 		reg-names = "ife-lite";
-		reg = <0x0 0xacc4000 0x0 0x5000>;
+		reg = <0xacc4000 0x5000>;
 		reg-cam-base = <0xc4000>;
 		interrupt-names = "ife-lite0";
 		interrupts = <GIC_SPI 469 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		regulator-names = "camss";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
 		clock-names =
 			"ife_clk_src",
 			"ife_clk";
@@ -1536,42 +1306,21 @@
 			<600000000 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "ife_clk_src";
-		operating-points-v2 = <&vfe_lite0_opp_table>;
-
 		clock-control-debugfs = "true";
 		cam_hw_pid = <11>;
 		status = "ok";
-		vfe_lite0_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-320000000 {
-				opp-hz = /bits/ 64 <320000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-480000000 {
-				opp-hz = /bits/ 64 <480000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-600000000 {
-				opp-hz = /bits/ 64 <600000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_csid_lite1: qcom,csid-lite1 {
 		cell-index = <4>;
 		compatible = "qcom,csid-lite165";
 		reg-names = "csid-lite";
-		reg = <0x0 0x0accf000 0x0 0x1000>;
+		reg = <0x0accf000 0x1000>;
 		reg-cam-base = <0xcf000>;
 		interrupt-names = "csid-lite1";
 		interrupts = <GIC_SPI 359 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		regulator-names = "camss";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
 		clock-names =
 			"ife_csid_clk_src",
 			"ife_csid_clk",
@@ -1591,41 +1340,20 @@
 			<400000000 0 0 600000000 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "ife_csid_clk_src";
-		operating-points-v2 = <&csid_lite1_opp_table>;
-
 		clock-control-debugfs = "true";
 		status = "ok";
-		csid_lite1_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-320000000 {
-				opp-hz = /bits/ 64 <320000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-480000000 {
-				opp-hz = /bits/ 64 <480000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-600000000 {
-				opp-hz = /bits/ 64 <600000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_vfe_lite1: qcom,vfe-lite1 {
 		cell-index = <4>;
 		compatible = "qcom,vfe-lite165";
 		reg-names = "ife-lite";
-		reg = <0x0 0x0accb000 0x0 0x5000>;
+		reg = <0x0accb000 0x5000>;
 		reg-cam-base = <0xcb000>;
 		interrupt-names = "ife-lite1";
 		interrupts = <GIC_SPI 360 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		regulator-names = "camss";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
 		clock-names =
 			"ife_clk_src",
 			"ife_clk";
@@ -1639,31 +1367,9 @@
 			<600000000 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "ife_clk_src";
-		operating-points-v2 = <&vfe_lite1_opp_table>;
-
 		clock-control-debugfs = "true";
 		cam_hw_pid = <12>;
 		status = "ok";
-		vfe_lite1_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-320000000 {
-				opp-hz = /bits/ 64 <320000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-480000000 {
-				opp-hz = /bits/ 64 <480000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-600000000 {
-				opp-hz = /bits/ 64 <600000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	qcom,cam-icp {
@@ -1681,20 +1387,21 @@
 	cam_a5: qcom,a5 {
 		cell-index = <0>;
 		compatible = "qcom,cam-a5";
-		reg = <0x0 0xac00000 0x0 0x6000>,
-			<0x0 0xac10000 0x0 0x8000>,
-			<0x0 0xac18000 0x0 0x3000>;
+		reg = <0xac00000 0x6000>,
+			<0xac10000 0x8000>,
+			<0xac18000 0x3000>;
 		reg-names = "a5_qgic", "a5_sierra", "a5_csr";
 		reg-cam-base = <0x00000 0x10000 0x18000>;
 		interrupts = <GIC_SPI 463 IRQ_TYPE_EDGE_RISING>;
 		interrupt-names = "a5";
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		regulator-names = "camss-vdd";
+		camss-vdd-supply = <&cam_cc_titan_top_gdsc>;
 		clock-names =
 			"soc_fast_ahb",
 			"icp_ahb_clk",
 			"icp_clk_src",
 			"icp_clk";
-		src-clock-name = "soc_fast_ahb";
+		src-clock-name = "icp_clk_src";
 		clocks =
 			<&camcc CAM_CC_FAST_AHB_CLK_SRC>,
 			<&camcc CAM_CC_ICP_AHB_CLK>,
@@ -1704,11 +1411,10 @@
 			<100000000 0 400000000 0>,
 			<200000000 0 400000000 0>,
 			<300000000 0 600000000 0>,
+			<400000000 0 600000000 0>,
 			<400000000 0 600000000 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1",
-					"nominal";
-		operating-points-v2 = <&a5_opp_table>;
-
+					"nominal", "turbo";
 		fw_name = "CAMERA_ICP_170.elf";
 		ubwc-ipe-fetch-cfg = <0x7073 0x707b>;
 		ubwc-ipe-write-cfg = <0x161cf 0x161ef>;
@@ -1716,35 +1422,16 @@
 		ubwc-bps-write-cfg = <0x161cf 0x161ef>;
 		qos-val = <0x00000A0A>;
 		status = "ok";
-		a5_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-100000000 {
-				opp-hz = /bits/ 64 <100000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-200000000 {
-				opp-hz = /bits/ 64 <200000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-300000000 {
-				opp-hz = /bits/ 64 <300000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_ipe0: qcom,ipe0 {
 		cell-index = <0>;
 		compatible = "qcom,cam-ipe";
-		reg = <0x0 0xac87000 0x0 0xa000>;
+		reg = <0xac87000 0xa000>;
 		reg-names = "ipe0_top";
 		reg-cam-base = <0x87000>;
-		power-domains = <&camcc CAM_CC_IPE_0_GDSC>;
+		regulator-names = "ipe0-vdd";
+		ipe0-vdd-supply = <&cam_cc_ipe_0_gdsc>;
 		clock-names =
 			"ipe_0_ahb_clk",
 			"ipe_0_areg_clk",
@@ -1768,38 +1455,17 @@
 			<0 0 0 600000000 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1",
 				"nominal", "turbo";
-		operating-points-v2 = <&ipe0_opp_table>;
-
 		status = "ok";
-		ipe0_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-300000000 {
-				opp-hz = /bits/ 64 <300000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-430000000 {
-				opp-hz = /bits/ 64 <430000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-520000000 {
-				opp-hz = /bits/ 64 <520000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-600000000 {
-				opp-hz = /bits/ 64 <600000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_bps: qcom,bps {
 		cell-index = <0>;
 		compatible = "qcom,cam-bps";
-		reg = <0x0 0xac6f000 0x0 0x8000>;
+		reg = <0xac6f000 0x8000>;
 		reg-names = "bps_top";
 		reg-cam-base = <0x6f000>;
-		power-domains = <&camcc CAM_CC_BPS_GDSC>;
+		regulator-names = "bps-vdd";
+		bps-vdd-supply = <&cam_cc_bps_gdsc>;
 		clock-names =
 			"bps_ahb_clk",
 			"bps_areg_clk",
@@ -1823,29 +1489,7 @@
 			<0 0 0 600000000 0>;
 		clock-cntl-level = "lowsvs", "svs", "svs_l1",
 				"nominal", "turbo";
-		operating-points-v2 = <&bps_opp_table>;
-
 		status = "ok";
-		bps_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-200000000 {
-				opp-hz = /bits/ 64 <200000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-480000000 {
-				opp-hz = /bits/ 64 <480000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-600000000 {
-				opp-hz = /bits/ 64 <600000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	qcom,cam-jpeg {
@@ -1861,12 +1505,13 @@
 		cell-index = <0>;
 		compatible = "qcom,cam_jpeg_enc_165";
 		reg-names = "jpege_hw", "cam_camnoc";
-		reg = <0x0 0xac4e000 0x0 0x4000>,
-			<0x0 0x0ac9f000 0x0 0x10000>;
+		reg = <0xac4e000 0x4000>,
+			<0x0ac9f000 0x10000>;
 		reg-cam-base = <0x4e000 0x9f000>;
 		interrupt-names = "jpeg";
 		interrupts = <GIC_SPI 474 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		regulator-names = "camss-vdd";
+		camss-vdd-supply = <&cam_cc_titan_top_gdsc>;
 		clock-names =
 			"jpegenc_clk_src",
 			"jpegenc_clk";
@@ -1876,33 +1521,24 @@
 
 		clock-rates = <600000000 0>;
 		src-clock-name = "jpegenc_clk_src";
-		operating-points-v2 = <&jpeg_enc_opp_table>;
-
 		clock-cntl-level = "nominal";
 		cam_hw_pid = <22 23>;
 		cam_hw_rd_mid = <0>;
 		cam_hw_wr_mid = <2>;
 		status = "ok";
-		jpeg_enc_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-600000000 {
-				opp-hz = /bits/ 64 <600000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	cam_jpeg_dma: qcom,jpegdma {
 		cell-index = <0>;
 		compatible = "qcom,cam_jpeg_dma_165";
 		reg-names = "jpegdma_hw", "cam_camnoc";
-		reg = <0x0 0xac52000 0x0 0x4000>,
-			<0x0 0x0ac9f000 0x0 0x10000>;
+		reg = <0xac52000 0x4000>,
+			<0x0ac9f000 0x10000>;
 		reg-cam-base = <0x52000 0x9f000>;
 		interrupt-names = "jpegdma";
 		interrupts = <GIC_SPI 475 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		regulator-names = "camss-vdd";
+		camss-vdd-supply = <&cam_cc_titan_top_gdsc>;
 		clock-names =
 			"jpegdma_clk_src",
 			"jpegdma_clk";
@@ -1912,21 +1548,11 @@
 
 		clock-rates = <600000000 0>;
 		src-clock-name = "jpegdma_clk_src";
-		operating-points-v2 = <&jpeg_dma_opp_table>;
-
 		clock-cntl-level = "nominal";
 		cam_hw_pid = <20 21>;
 		cam_hw_rd_mid = <0>;
 		cam_hw_wr_mid = <2>;
 		status = "ok";
-		jpeg_dma_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-600000000 {
-				opp-hz = /bits/ 64 <600000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	qcom,cam-lrme {
@@ -1939,44 +1565,25 @@
 		cell-index = <0>;
 		compatible = "qcom,lrme";
 		reg-names = "lrme";
-		reg = <0x0 0xac6b000 0x0 0x1000>;
+		reg = <0xac6b000 0x1000>;
 		reg-cam-base = <0x6b000>;
 		interrupt-names = "lrme";
 		interrupts = <GIC_SPI 476 IRQ_TYPE_EDGE_RISING>;
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		regulator-names = "camss-vdd";
+		camss-supply = <&cam_cc_titan_top_gdsc>;
 		clock-names = "lrme_clk_src",
 			"lrme_clk";
 		clocks = <&camcc CAM_CC_LRME_CLK_SRC>,
 			<&camcc CAM_CC_LRME_CLK>;
-		clock-rates = <240000000 0>,
-			<300000000 0>,
-			<320000000 0>,
-			<400000000 0>;
-		clock-cntl-level = "lowsvs", "svs", "svs_l1", "nominal";
+		clock-rates = <240000000 240000000>,
+			<300000000 300000000>,
+			<320000000 320000000>,
+			<400000000 400000000>,
+			<400000000 400000000>;
+		clock-cntl-level = "lowsvs", "svs", "svs_l1", "nominal",
+			"turbo";
 		src-clock-name = "lrme_clk_src";
-		operating-points-v2 = <&lrme_opp_table>;
-
 		status = "ok";
-		lrme_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-240000000 {
-				opp-hz = /bits/ 64 <240000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-300000000 {
-				opp-hz = /bits/ 64 <300000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-320000000 {
-				opp-hz = /bits/ 64 <320000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-		};
 	};
 
 	qcom,cam-cpas {
@@ -1988,8 +1595,8 @@
 		#address-cells = <1>;
 		#size-cells = <1>;
 		reg-names = "cam_cpas_top", "cam_camnoc";
-		reg = <0x0 0x0ac40000 0x0 0x1000>,
-			<0x0 0x0ac9f000 0x0 0x10000>;
+		reg = <0x0ac40000 0x1000>,
+			<0x0ac9f000 0x10000>;
 		reg-cam-base = <0x40000 0x9f000>;
 		cam_hw_fuse = <CAM_CPAS_ISP_FUSE 0x7801FC 0x10 CAM_CPAS_FEATURE_TYPE_DISABLE 0x4>,
 			      <CAM_CPAS_ISP_LITE_FUSE 0x7801FC 0x20 CAM_CPAS_FEATURE_TYPE_DISABLE 0x10>,
@@ -2000,7 +1607,8 @@
 		interrupt-names = "cpas_camnoc";
 		interrupts = <GIC_SPI 459 IRQ_TYPE_EDGE_RISING>;
 		camnoc-axi-min-ib-bw = <3000000000>;
-		power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>;
+		regulator-names = "camss-vdd";
+		camss-vdd-supply = <&cam_cc_titan_top_gdsc>;
 		clock-names =
 			"gcc_camera_hf_axi_clk",
 			"gcc_camera_sf_axi_clk",
@@ -2029,19 +1637,18 @@
 			<0 0 80000000 0 480000000 0 0 0>;
 		clock-cntl-level = "suspend", "lowsvs", "svs",
 			"svs_l1", "nominal", "turbo";
-		operating-points-v2 = <&cpas_opp_table>;
 		control-camnoc-axi-clk;
 		camnoc-bus-width = <32>;
 		camnoc-axi-clk-bw-margin-perc = <20>;
 		interconnect-names = "cam_ahb", "cam_hf_0", "cam_sf_0", "cam_sf_icp";
-		interconnects =<&gem_noc MASTER_APPSS_PROC 0
-			&cnoc2 SLAVE_CAMERA_CFG 0>,
-				<&mmss_noc MASTER_CAMNOC_HF 0
-			&mc_virt SLAVE_EBI1 0>,
-				<&mmss_noc MASTER_CAMNOC_SF 0
-			&mc_virt SLAVE_EBI1 0>,
-				<&mmss_noc MASTER_CAMNOC_ICP 0
-			&mc_virt SLAVE_EBI1 0>;
+		interconnects =<&gem_noc MASTER_APPSS_PROC
+			&cnoc2 SLAVE_CAMERA_CFG>,
+				<&mmss_noc MASTER_CAMNOC_HF
+			&mc_virt SLAVE_EBI1>,
+				<&mmss_noc MASTER_CAMNOC_SF
+			&mc_virt SLAVE_EBI1>,
+				<&mmss_noc MASTER_CAMNOC_ICP
+			&mc_virt SLAVE_EBI1>;
 
 		cam-ahb-num-cases = <7>;
 		cam-ahb-bw-KBps =
@@ -2071,30 +1678,6 @@
 			"bps0", "icp0", "jpeg-dma0", "jpeg-enc0",
 			"lrmecpas0";
 
-		cpas_opp_table: opp-table {
-			compatible = "operating-points-v2";
-
-			opp-150000000 {
-				opp-hz = /bits/ 64 <150000000>;
-				required-opps = <&rpmhpd_opp_low_svs>;
-			};
-			opp-240000000 {
-				opp-hz = /bits/ 64 <240000000>;
-				required-opps = <&rpmhpd_opp_svs>;
-			};
-			opp-320000000 {
-				opp-hz = /bits/ 64 <320000000>;
-				required-opps = <&rpmhpd_opp_svs_l1>;
-			};
-			opp-400000000 {
-				opp-hz = /bits/ 64 <400000000>;
-				required-opps = <&rpmhpd_opp_nom>;
-			};
-			opp-480000000 {
-				opp-hz = /bits/ 64 <480000000>;
-				required-opps = <&rpmhpd_opp_turbo>;
-			};
-		};
 		camera-bus-nodes {
 			level0-nodes {
 				level-index = <0>;
@@ -2484,8 +2067,8 @@
 					qcom,axi-port-mnoc {
 						interconnect-names = "cam_hf_0";
 						interconnects =
-						<&mmss_noc MASTER_CAMNOC_HF 0
-						&mc_virt SLAVE_EBI1 0>;
+						<&mmss_noc MASTER_CAMNOC_HF
+						&mc_virt SLAVE_EBI1>;
 					};
 				};
 
@@ -2497,8 +2080,8 @@
 					qcom,axi-port-mnoc {
 						interconnect-names = "cam_sf_0";
 						interconnects =
-						<&mmss_noc MASTER_CAMNOC_SF 0
-						&mc_virt SLAVE_EBI1 0>;
+						<&mmss_noc MASTER_CAMNOC_SF
+						&mc_virt SLAVE_EBI1>;
 					};
 				};
 
@@ -2510,8 +2093,8 @@
 					qcom,axi-port-mnoc {
 						interconnect-names = "cam_sf_icp";
 						interconnects =
-						<&mmss_noc MASTER_CAMNOC_ICP 0
-						&mc_virt SLAVE_EBI1 0>;
+						<&mmss_noc MASTER_CAMNOC_ICP
+						&mc_virt SLAVE_EBI1>;
 					};
 				};
 			};
