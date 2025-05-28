@@ -10,19 +10,28 @@
 	led_flash_triple_rear: qcom,camera-flash@4 {
 		cell-index = <4>;
 		compatible = "qcom,camera-flash";
-		status = "disabled";
+		flash-source = <&pm8350c_flash0 &pm8350c_flash1>;
+                torch-source = <&pm8350c_torch0 &pm8350c_torch1>;
+                switch-source = <&pm8350c_switch2>;
+		status = "ok";
 	};
 
 	led_flash_triple_rear_aux: qcom,camera-flash@5 {
 		cell-index = <5>;
 		compatible = "qcom,camera-flash";
-		status = "disabled";
+                flash-source = <&pm8350c_flash0 &pm8350c_flash1>;
+                torch-source = <&pm8350c_torch0 &pm8350c_torch1>;
+                switch-source = <&pm8350c_switch2>;
+		status = "ok";
 	};
 
 	led_flash_triple_rear_aux2: qcom,camera-flash@6 {
 		cell-index = <6>;
 		compatible = "qcom,camera-flash";
-		status = "disabled";
+		flash-source = <&pm8350c_flash0 &pm8350c_flash1>;
+                torch-source = <&pm8350c_torch0 &pm8350c_torch1>;
+		switch-source = <&pm8350c_switch2>;
+		status = "ok";
 	};
 
 	qcom,cam-res-mgr {
