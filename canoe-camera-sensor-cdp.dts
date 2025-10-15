@@ -19,7 +19,7 @@
 	model = "Qualcomm Technologies, Inc. canoe/honu CDP/RCM";
 	compatible = "qcom,canoe", "qcom,canoep", "qcom,canoe-cdp",
 		"qcom,canoep-cdp", "qcom,cdp", "qcom,canoe-rcm", "qcom,canoep-rcm",
-		"qcom,rcm";
+		"qcom,rcm", "qcom,whale", "qcom,whalep";
 	qcom,msm-id = <660 0x10000>, <660 0x20000>, <661 0x10000>,
 		<661 0x20000>, <0x1000294 0x10000>, <0x1000294 0x20000>,
 		<0x1000295 0x10000>, <0x1000295 0x20000>,<0x10294 0x10000>,
