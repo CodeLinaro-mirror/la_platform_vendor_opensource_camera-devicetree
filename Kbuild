@@ -48,6 +48,10 @@ ifeq ($(CONFIG_ARCH_ALOR), y)
 export CONFIG_ARCH_ALOR=y
 endif
 
+ifeq ($(CONFIG_ARCH_CHORA), y)
+export CONFIG_ARCH_CHORA=y
+endif
+
 # Since Kernel SI can support multiple ARCH's this allows only the current selected target ARCH
 # to compile.
 ifeq ($(CAMERA_TARGET_EXISTS), y)
