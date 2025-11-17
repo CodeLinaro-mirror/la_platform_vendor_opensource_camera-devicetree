@@ -17,3 +17,4 @@ dtbo-$(CONFIG_ARCH_CANOE)   += canoe-camera-v2.dtbo \
 	alor-camera-sensor-qrd.dtbo \
 	alor-camera-sensor-mtp-peach.dtbo \
 	alor-camera-sensor-rcm-peach.dtbo
+dtbo-$(CONFIG_ARCH_CHORA) += chora-camera.dtbo
