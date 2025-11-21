@@ -210,8 +210,9 @@
 			"cam_hf_0",
 			"cam_sf_0",
 			"cam_sf_icp";
-		interconnects =<&gem_noc MASTER_APPSS_PROC
-			&cnoc2 SLAVE_CAMERA_CFG>,
+		interconnects =
+			<&gem_noc MASTER_APPSS_PROC
+				&config_noc SLAVE_CAMERA_CFG>,
 			<&mmss_noc MASTER_CAMNOC_HF
 				&mc_virt SLAVE_EBI1>,
 			<&mmss_noc MASTER_CAMNOC_SF
