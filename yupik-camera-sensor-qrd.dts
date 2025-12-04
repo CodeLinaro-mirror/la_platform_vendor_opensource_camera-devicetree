@@ -8,14 +8,14 @@
 
 #include <dt-bindings/clock/qcom,camcc-sc7280.h>
 #include <dt-bindings/clock/qcom,gcc-sc7280.h>
-#include <dt-bindings/interconnect/qcom,yupik.h>
+#include <dt-bindings/interconnect/qcom,sc7280.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
 
-#include "yupik-camera.dtsi"
+#include "yupik-camera-sensor-qrd.dtsi"
 / {
-	model = "Qualcomm Technologies, Katmai FP2 IOT HSP + PM7250B";
-	compatible = "qcom,yupik-iot-idp", "qcom,yupik-iot", "qcom,idp";
+	model = "Qualcomm Technologies, Inc. Katmai FP2 IOT HSP + PM7250B";
+        compatible = "qcom,yupik-iot-idp", "qcom,yupik-iot", "qcom,idp";
 	qcom,msm-id =<475 0x10000>, <497 0x10000>, <498 0x10000>, <515 0x10000>, <575 0x10000>, <576 0x10000>;
-	qcom,board-id = <0 0>;
+        qcom,board-id = <0x1000B 0>;
 };
