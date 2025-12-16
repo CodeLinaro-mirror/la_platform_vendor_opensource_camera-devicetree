@@ -927,7 +927,7 @@
 		};
 	};
 
-	qcom,cam-cpas@ac13000 {
+	cam_cpas: qcom,cam-cpas@ac13000 {
 		cell-index = <0>;
 		compatible = "qcom,cam-cpas";
 		label = "cpas";
@@ -1323,7 +1323,7 @@
 		status = "okay";
 	};
 
-	qcom,cpas-cdm0@ac24000 {
+	cam_cpas_cdm: qcom,cpas-cdm0@ac24000 {
 		cell-index = <0>;
 		compatible = "qcom,cam-cpas-cdm2_1";
 		label = "cpas-cdm";
@@ -1578,7 +1578,7 @@
 		status = "okay";
 	};
 
-	qcom,cam-icp {
+	icp0: qcom,cam-icp {
 		compatible = "qcom,cam-icp";
 		label = "cam_icp";
 		compat-hw-name = "qcom,icp",
@@ -1592,7 +1592,7 @@
 		icp_use_pil;
 	};
 
-	cam_icp: qcom,icp {
+	cam_icp0: qcom,icp {
 		cell-index = <0>;
 		compatible = "qcom,cam-icp_v2";
 		label = "cam_icp0";
@@ -1634,14 +1634,14 @@
 		status = "okay";
 	};
 
-	qcom,cam-cre {
+	cre: qcom,cam-cre {
 		compatible = "qcom,cam-cre";
 		compat-hw-name = "qcom,cre";
 		num-cre = <1>;
 		status = "okay";
 	};
 
-	cre: qcom,cre@acfa000 {
+	cam_cre: qcom,cre@acfa000 {
 		cell-index = <0>;
 		compatible = "qcom,cre";
 		label = "cam_cre";
