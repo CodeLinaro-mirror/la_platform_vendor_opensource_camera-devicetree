@@ -482,9 +482,8 @@
 };
 
 &soc {
-
-	#address-cells = <1>;
-	#size-cells = <1>;
+	#address-cells = <2>;
+	#size-cells = <2>;
 	interrupt-parent = <&intc>;
 
 	cam_req_mgr: qcom,cam-req-mgr {
@@ -782,15 +781,21 @@
 		status = "okay";
 		force_cache_allocs;
 		need_shared_buffer_padding;
+		#address-cells = <2>;
+		#size-cells = <2>;
 
-		msm_cam_smmu_tfe {
+		msm_cam_smmu_tfe: msm_cam_smmu_tfe {
 			compatible = "qcom,msm-cam-smmu-cb";
 			iommus = <&apps_smmu 0x14A0 0x20>,
 				 <&apps_smmu 0x1480 0x20>;
-			qcom,iommu-dma-addr-pool = <0x100000 0xffe00000>;
 			dma-coherent;
 			qcom,iommu-faults ="non-fatal";
 			cam-smmu-label = "ife";
+			memory-region = <&cam_smmu_tfe_resv_region>;
+			cam_smmu_tfe_resv_region: cam_smmu_tfe_resv_region {
+				iommu-addresses = <&msm_cam_smmu_tfe 0x0 0x0 0x0 0x100000>,
+					<&msm_cam_smmu_tfe 0x0 0xfff00000 0xf 0x00100000>;
+			};
 			tfe_iova_mem_map: iova-mem-map {
 				/* IO region is approximately 3.4 GB */
 				iova-mem-region-io {
@@ -805,7 +810,7 @@
 			};
 		};
 
-		msm_cam_smmu_icp {
+		msm_cam_smmu_icp: msm_cam_smmu_icp {
 			compatible = "qcom,msm-cam-smmu-cb";
 			iommus = <&apps_smmu 0x1040 0x00A0>,
 				 <&apps_smmu 0x1060 0x00A0>,
@@ -813,10 +818,13 @@
 				 <&apps_smmu 0x1100 0x0000>,
 				 <&apps_smmu 0x1020 0x0000>;
 			cam-smmu-label = "icp";
-			qcom,iommu-dma-addr-pool = <0x10c00000 0xee300000>;
 			iova-region-discard = <0xe0000000 0x800000>;
 			dma-coherent;
 			qcom,iommu-faults ="non-fatal";
+			memory-region = <&cam_smmu_icp_resv_region>;
+			cam_smmu_icp_resv_region: cam_smmu_icp_resv_region {
+				iommu-addresses = <&msm_cam_smmu_icp 0x0 0x0 0x0 0x100000>;
+			};
 			icp_iova_mem_map: iova-mem-map {
 				iova-mem-region-shared {
 					/* Shared region is ~250MB long */
@@ -858,15 +866,19 @@
 			};
 		};
 
-		msm_cam_smmu_cre {
+		msm_cam_smmu_cre: msm_cam_smmu_cre {
 			compatible = "qcom,msm-cam-smmu-cb";
 			iommus = <&apps_smmu 0x1120 0x0000>,
 				 <&apps_smmu 0x1140 0x0000>;
 			multiple-client-devices;
-			qcom,iommu-dma-addr-pool = <0x100000 0xffe00000>;
 			cam-smmu-label = "cre";
 			dma-coherent;
 			qcom,iommu-faults ="non-fatal";
+			memory-region = <&cam_smmu_cre_resv_region>;
+			cam_smmu_cre_resv_region: cam_smmu_cre_resv_region {
+				iommu-addresses = <&msm_cam_smmu_cre 0x0 0x0 0x0 0x100000>,
+					<&msm_cam_smmu_cre 0x0 0xfff00000 0xf 0x00100000>;
+			};
 			cre_iova_mem_map: iova-mem-map {
 				/* IO region is approximately 3.4 GB */
 				iova-mem-region-io {
@@ -881,14 +893,18 @@
 			};
 		};
 
-		msm_cam_smmu_cpas_cdm {
+		msm_cam_smmu_cpas_cdm: msm_cam_smmu_cpas_cdm {
 			compatible = "qcom,msm-cam-smmu-cb";
 			iommus = <&apps_smmu 0x1000 0x0000>;
 			cam-smmu-label = "cpas-cdm";
-			qcom,iommu-dma-addr-pool = <0x100000 0xffe00000>;
 			dma-coherent;
 			qcom,iommu-faults ="non-fatal";
 			multiple-client-devices;
+			memory-region = <&cam_smmu_cdm_resv_region>;
+			cam_smmu_cdm_resv_region: cam_smmu_cdm_resv_region {
+				iommu-addresses = <&msm_cam_smmu_cpas_cdm 0x0 0x0 0x0 0x100000>,
+					<&msm_cam_smmu_cpas_cdm 0x0 0xfff00000 0xf 0x00100000>;
+			};
 			cpas_cdm_iova_mem_map: iova-mem-map {
 				iova-mem-region-io {
 					iova-region-name = "io";
@@ -912,12 +928,12 @@
 	qcom,cam-cpas@ac13000 {
 		cell-index = <0>;
 		compatible = "qcom,cam-cpas";
-		label = "cam_cpas";
+		label = "cpas";
 		arch-compat = "cpas_top";
 		reg-names = "cam_cpas_top", "cam_camnoc", "cam_rpmh";
-		reg = <0xac13000 0x1000>,
-			<0xac19000 0xB000>,
-			<0xbbf0000 0x1F00>;
+		reg = <0x0 0xac13000 0x0 0x1000>,
+			<0x0 0xac19000 0x0 0xB000>,
+			<0x0 0xbbf0000 0x0 0x1F00>;
 		reg-cam-base = <0x13000 0x19000 0x0bbf0000>;
 		interrupt-names = "cpas_camnoc";
 		interrupts = <GIC_SPI 459 IRQ_TYPE_EDGE_RISING>;
@@ -1284,7 +1300,7 @@
 				};
 
 				icp0_all_rd: icp0-all-rd {
-					cell-index = <26>;
+					cell-index = <28>;
 					node-name = "icp0-all-rd";
 					client-name = "icp0";
 					traffic-data = <CAM_CPAS_PATH_DATA_ALL>;
@@ -1308,8 +1324,8 @@
 	qcom,cpas-cdm0@ac24000 {
 		cell-index = <0>;
 		compatible = "qcom,cam-cpas-cdm2_1";
-		label = "cam_cpas_cdm";
-		reg = <0xac24000 0x400>;
+		label = "cpas-cdm";
+		reg = <0x0 0xac24000 0x0 0x400>;
 		reg-names = "cpas-cdm";
 		reg-cam-base = <0x24000>;
 		interrupt-names = "cpas-cdm";
@@ -1427,7 +1443,7 @@
 		compatible = "qcom,csid662";
 		label = "cam_csid0";
 		reg-names = "csid0";
-		reg = <0xac62000 0x1000>;
+		reg = <0x0 0xac62000 0x0 0x1000>;
 		reg-cam-base = <0x62000 0x19000>;
 		interrupt-names = "csid0";
 		interrupts = <GIC_SPI 464 IRQ_TYPE_EDGE_RISING>;
@@ -1458,10 +1474,10 @@
 
 	cam_tfe0: qcom,tfe0@ac62000 {
 		cell-index = <0>;
-		compatible = "qcom,tfe662";
+		compatible = "qcom,mc_tfe662";
 		label = "cam_tfe0";
 		reg-names = "tfe0";
-		reg = <0xac62000 0xD000>;
+		reg = <0x0 0xac62000 0x0 0xD000>;
 		reg-cam-base = <0x62000>;
 		interrupt-names = "tfe0";
 		interrupts = <GIC_SPI 602 IRQ_TYPE_EDGE_RISING>;
@@ -1496,7 +1512,7 @@
 		compatible = "qcom,csid662";
 		label = "cam_csid1";
 		reg-names = "csid1";
-		reg = <0xac71000 0x1000>;
+		reg = <0x0 0xac71000 0x0 0x1000>;
 		reg-cam-base = <0x71000 0x19000>;
 		interrupt-names = "csid1";
 		interrupts = <GIC_SPI 466 IRQ_TYPE_EDGE_RISING>;
@@ -1527,10 +1543,10 @@
 
 	cam_tfe1: qcom,tfe1@ac71000 {
 		cell-index = <1>;
-		compatible = "qcom,tfe662";
+		compatible = "qcom,mc_tfe662";
 		label = "cam_tfe1";
 		reg-names = "tfe1";
-		reg = <0xac71000 0xD000>;
+		reg = <0x0 0xac71000 0x0 0xD000>;
 		reg-cam-base = <0x71000>;
 		interrupt-names = "tfe1";
 		interrupts = <GIC_SPI 604 IRQ_TYPE_EDGE_RISING>;
@@ -1578,10 +1594,10 @@
 		cell-index = <0>;
 		compatible = "qcom,cam-icp_v2";
 		label = "cam_icp0";
-		icp-version = <0x0201>;
-		reg = <0xac01000 0x400>,
-			<0xac01800 0x400>,
-			<0xac04000 0x1000>;
+		icp-version = <0x0200>;
+		reg = <0x0 0xac01000 0x0 0x400>,
+			<0x0 0xac01800 0x0 0x400>,
+			<0x0 0xac04000 0x0 0x1000>;
 		reg-names = "icp_csr", "icp_cirq", "icp_wd0";
 		reg-cam-base = <0x1000 0x1800 0x4000>;
 		interrupt-names = "icp";
@@ -1627,9 +1643,9 @@
 		cell-index = <0>;
 		compatible = "qcom,cre";
 		label = "cam_cre";
-		reg =	<0xacfa000 0x200>,
-			<0xacfa400 0xB0>,
-			<0xacfa700 0x300>;
+		reg =	<0x0 0xacfa000 0x0 0x200>,
+			<0x0 0xacfa400 0x0 0xB0>,
+			<0x0 0xacfa700 0x0 0x300>;
 		reg-names =
 			"cre_top",
 			"cre_bus_rd",
@@ -1665,7 +1681,7 @@
 		cell-index = <0>;
 		compatible = "qcom,cam-ipe680";
 		label = "cam_ipe0";
-		reg = <0xac42000 0xA900>;
+		reg = <0x0 0xac42000 0x0 0xA900>;
 		reg-names = "ipe0_top";
 		reg-cam-base = <0x42000>;
 		power-domains = <&camcc CAM_CC_CAMSS_TOP_GDSC>;
@@ -1699,7 +1715,7 @@
 		cell-index = <0>;
 		compatible = "qcom,cam-bps680";
 		label = "cam_bps";
-		reg = <0xac2c000 0x8000>;
+		reg = <0x0 0xac2c000 0x0 0x8000>;
 		reg-names = "bps_top";
 		reg-cam-base = <0x2c000>;
 		power-domains = <&camcc CAM_CC_CAMSS_TOP_GDSC>;
