@@ -499,7 +499,7 @@
 	cam_csiphy0: qcom,csiphy0@ace4000 {
 		cell-index = <0>;
 		compatible = "qcom,csiphy-v2.2.1", "qcom,csiphy";
-		reg = <0x0ace4000 0x2000>;
+		reg = <0x0 0x0ace4000 0x0 0x2000>;
 		reg-names = "csiphy";
 		reg-cam-base = <0xe4000>;
 		interrupt-names = "CSIPHY0";
@@ -535,7 +535,7 @@
 	cam_csiphy1: qcom,csiphy1@ace6000 {
 		cell-index = <1>;
 		compatible = "qcom,csiphy-v2.2.1", "qcom,csiphy";
-		reg = <0xace6000 0x2000>;
+		reg = <0x0 0x0ace6000 0x0 0x2000>;
 		reg-names = "csiphy";
 		reg-cam-base = <0xe6000>;
 		interrupt-names = "CSIPHY1";
@@ -571,7 +571,7 @@
 	cam_csiphy2: qcom,csiphy2@ace8000 {
 		cell-index = <2>;
 		compatible = "qcom,csiphy-v2.2.1", "qcom,csiphy";
-		reg = <0xace8000 0x2000>;
+		reg = <0x0 0x0ace8000 0x0 0x2000>;
 		reg-names = "csiphy";
 		reg-cam-base = <0xe8000>;
 		interrupt-names = "CSIPHY2";
@@ -606,7 +606,7 @@
 	cam_cci0: qcom,cci0@ac15000 {
 		cell-index = <0>;
 		compatible = "qcom,cci", "simple-bus";
-		reg = <0xac15000 0x1000>;
+		reg = <0x0 0x0ac15000 0x0 0x1000>;
 		reg-names = "cci";
 		reg-cam-base = <0x15000>;
 		interrupt-names = "CCI0";
@@ -693,7 +693,7 @@
 	cam_cci1: qcom,cci1@ac16000 {
 		cell-index = <1>;
 		compatible = "qcom,cci", "simple-bus";
-		reg = <0xac16000 0x1000>;
+		reg = <0x0 0x0ac16000 0x0 0x1000>;
 		reg-names = "cci";
 		reg-cam-base = <0x16000>;
 		interrupt-names = "CCI1";
@@ -1349,7 +1349,7 @@
 		phy-id     = <0>;
 		compatible = "qcom,cam-tpg103";
 		reg-names = "tpg0";
-		reg = <0xacf6000 0x400>;
+		reg = <0x0 0x0acf6000 0x0 0x400>;
 		reg-cam-base = <0xf6000>;
 		interrupt-names = "tpg0";
 		interrupts = <GIC_SPI 413 IRQ_TYPE_EDGE_RISING>;
@@ -1378,7 +1378,7 @@
 		phy-id     = <1>;
 		compatible = "qcom,cam-tpg103";
 		reg-names = "tpg1";
-		reg = <0xacf7000 0x400>;
+		reg = <0x0 0x0acf7000 0x0 0x400>;
 		reg-cam-base = <0xf7000>;
 		interrupt-names = "tpg1";
 		interrupts = <GIC_SPI 416 IRQ_TYPE_EDGE_RISING>;
@@ -1408,7 +1408,7 @@
 		hw-no-ops;
 		compatible = "qcom,cam-tpg103";
 		reg-names = "tpg1";
-		reg = <0xacf7000 0x400>;
+		reg = <0x0 0x0acf7000 0x0 0x400>;
 		reg-cam-base = <0xf7000>;
 		interrupt-names = "tpg1";
 		interrupts = <GIC_SPI 416 IRQ_TYPE_EDGE_RISING>;
