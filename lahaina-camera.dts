@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/interconnect/qcom,lahaina.h>
+#include <dt-bindings/clock/qcom,camcc-sm8350.h>
+#include <dt-bindings/clock/qcom,gcc-sm8350.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
+
+#include "lahaina-camera.dtsi"
+/ {
+	model = "Qualcomm Technologies, Inc. lahaina v1 SoC";
+	compatible = "qcom,lahaina";
+	qcom,msm-id = <415 0x20001>, <456 0x20001>, <501 0x20001>;
+	qcom,board-id = <0 0>;
+};
