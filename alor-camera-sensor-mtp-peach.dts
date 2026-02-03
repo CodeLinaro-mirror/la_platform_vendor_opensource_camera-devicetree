@@ -18,5 +18,5 @@
 	model = "Qualcomm Technologies, Inc. Alor MTP";
 	compatible = "qcom,alor", "qcom,alor-mtp", "qcom,mtp";
 	qcom,msm-id = <685 0x10000>, <727 0x10000>;
-	qcom,board-id = <0x30008 0>;
+	qcom,board-id = <0x30008 0>, <0x40008 0>;
 };
