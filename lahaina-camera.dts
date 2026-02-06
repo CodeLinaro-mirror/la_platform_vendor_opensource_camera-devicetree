@@ -14,8 +14,9 @@
 
 #include "lahaina-camera.dtsi"
 / {
-	model = "Qualcomm Technologies, Inc. lahaina v1 SoC";
+	model =  "Qualcomm Technologies, Inc. Lahaina SoC";
 	compatible = "qcom,lahaina";
-	qcom,msm-id = <415 0x20001>, <456 0x20001>, <501 0x20001>;
+	qcom,msm-id = <415 0x20001>, <456 0x20001>, <501 0x20001>,
+		      <415 0x20000>, <456 0x20000>, <501 0x20000>;
 	qcom,board-id = <0 0>;
 };
