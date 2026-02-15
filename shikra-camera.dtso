@@ -1,0 +1,17 @@
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause
+*/
+
+/dts-v1/;
+/plugin/;
+
+#include "shikra-camera.dtsi"
+//#include "shikra-camera-sensor-idp.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Shikra Camera";
+	compatible = "qcom,shikra-camera", "qcom,shikra";
+	qcom,msm-id = <756 0x10000>, <758 0x10000 >, <759 0x10000>;
+	qcom,board-id = <0 0>, <15 0>;
+};
