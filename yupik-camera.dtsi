@@ -1679,6 +1679,154 @@
 			"lrmecpas0";
 
 		camera-bus-nodes {
+			level3-nodes {
+				level-index = <3>;
+				level3_rt0_wr_sum: level3-rt0-wr-sum {
+					cell-index = <0>;
+					node-name = "level3-rt0-wr-sum";
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+					ib-bw-voting-needed;
+					qcom,axi-port-mnoc {
+						interconnect-names = "cam_hf_0";
+						interconnects =
+						<&mmss_noc MASTER_CAMNOC_HF
+						&mc_virt SLAVE_EBI1>;
+					};
+				};
+
+				level3_nrt0_rd_wr_sum: level3-nrt0-rd-wr-sum {
+					cell-index = <1>;
+					node-name = "level3-nrt0-rd-wr-sum";
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+					qcom,axi-port-mnoc {
+						interconnect-names = "cam_sf_0";
+						interconnects =
+						<&mmss_noc MASTER_CAMNOC_SF
+						&mc_virt SLAVE_EBI1>;
+					};
+				};
+
+				level3_nrt1_rd_sum: level3-nrt1-rd-sum {
+					cell-index = <2>;
+					node-name = "level3-nrt1-rd-sum";
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+					qcom,axi-port-mnoc {
+						interconnect-names = "cam_sf_icp";
+						interconnects =
+						<&mmss_noc MASTER_CAMNOC_ICP
+						&mc_virt SLAVE_EBI1>;
+					};
+				};
+			};
+
+			level2-nodes {
+				level-index = <3>;
+				camnoc-max-needed;
+				level2_rt0_write0: level2-rt0-write0 {
+					cell-index = <3>;
+					node-name = "level2-rt0-write0";
+					parent-node = <&level3_rt0_wr_sum>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM_INTERLEAVE>;
+				};
+
+				level2_rt1_write0: level2-rt1-write0 {
+					cell-index = <4>;
+					node-name = "level2-rt1-write0";
+					parent-node = <&level3_rt0_wr_sum>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM_INTERLEAVE>;
+				};
+
+				level2_nrt0_write0: level2-nrt0-write0 {
+					cell-index = <5>;
+					node-name = "level2-nrt0-write0";
+					parent-node = <&level3_nrt0_rd_wr_sum>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+				};
+
+				level2_nrt0_read0: level2-nrt0-read0 {
+					cell-index = <6>;
+					node-name = "level2-nrt0-read0";
+					parent-node = <&level3_nrt0_rd_wr_sum>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+				};
+
+				level2_nrt1_read0: level2-nrt1-read0 {
+					cell-index = <7>;
+					node-name = "level2-nrt1-read0";
+					parent-node = <&level3_nrt1_rd_sum>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+					bus-width-factor = <4>;
+				};
+			};
+
+			level1-nodes {
+				level-index = <1>;
+				camnoc-max-needed;
+				level1_rt0_write0: level1-rt0-write0 {
+					cell-index = <8>;
+					node-name = "level1-rt0-write0";
+					parent-node = <&level2_rt0_write0>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+				};
+
+				level1_rt1_write0: level1-rt1-write0 {
+					cell-index = <9>;
+					node-name = "level1-rt1-write0";
+					parent-node = <&level2_rt1_write0>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+				};
+
+				level1_rt1_write1: level1-rt1-write1 {
+					cell-index = <10>;
+					node-name = "level1-rt1-write1";
+					parent-node = <&level2_rt1_write0>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+				};
+
+				level1_nrt0_write0: level1-nrt0-write0 {
+					cell-index = <11>;
+					node-name = "level1-nrt0-write0";
+					parent-node = <&level2_nrt0_write0>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+				};
+
+				level1_nrt0_read0: level1-nrt0-read0 {
+					cell-index = <12>;
+					node-name = "level1-nrt0-read0";
+					parent-node = <&level2_nrt0_read0>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+				};
+
+				level1_nrt1_write0: level1-nrt1-write0 {
+					cell-index = <13>;
+					node-name = "level1-nrt1-write0";
+					parent-node = <&level2_nrt0_write0>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+				};
+
+				level1_nrt1_read0: level1-nrt1-read0 {
+					cell-index = <14>;
+					node-name = "level1-nrt1-read0";
+					parent-node = <&level2_nrt0_read0>;
+					traffic-merge-type =
+					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
+				};
+			};
+
 			level0-nodes {
 				level-index = <0>;
 				ife0_rdi_wr: ife0-rdi-wr {
@@ -1951,151 +2099,6 @@
 					traffic-transaction-type =
 					<CAM_CPAS_TRANSACTION_READ>;
 					parent-node = <&level2_nrt1_read0>;
-				};
-			};
-			level1-nodes {
-				level-index = <1>;
-				camnoc-max-needed;
-				level1_rt0_write0: level1-rt0-write0 {
-					cell-index = <8>;
-					node-name = "level1-rt0-write0";
-					parent-node = <&level2_rt0_write0>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-				};
-
-				level1_rt1_write0: level1-rt1-write0 {
-					cell-index = <9>;
-					node-name = "level1-rt1-write0";
-					parent-node = <&level2_rt1_write0>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-				};
-
-				level1_rt1_write1: level1-rt1-write1 {
-					cell-index = <10>;
-					node-name = "level1-rt1-write1";
-					parent-node = <&level2_rt1_write0>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-				};
-
-				level1_nrt0_write0: level1-nrt0-write0 {
-					cell-index = <11>;
-					node-name = "level1-nrt0-write0";
-					parent-node = <&level2_nrt0_write0>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-				};
-
-				level1_nrt0_read0: level1-nrt0-read0 {
-					cell-index = <12>;
-					node-name = "level1-nrt0-read0";
-					parent-node = <&level2_nrt0_read0>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-				};
-
-				level1_nrt1_write0: level1-nrt1-write0 {
-					cell-index = <13>;
-					node-name = "level1-nrt1-write0";
-					parent-node = <&level2_nrt0_write0>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-				};
-
-				level1_nrt1_read0: level1-nrt1-read0 {
-					cell-index = <14>;
-					node-name = "level1-nrt1-read0";
-					parent-node = <&level2_nrt0_read0>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-				};
-			};
-			level2-nodes {
-				level-index = <3>;
-				camnoc-max-needed;
-				level2_rt0_write0: level2-rt0-write0 {
-					cell-index = <3>;
-					node-name = "level2-rt0-write0";
-					parent-node = <&level3_rt0_wr_sum>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM_INTERLEAVE>;
-				};
-
-				level2_rt1_write0: level2-rt1-write0 {
-					cell-index = <4>;
-					node-name = "level2-rt1-write0";
-					parent-node = <&level3_rt0_wr_sum>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM_INTERLEAVE>;
-				};
-
-				level2_nrt0_write0: level2-nrt0-write0 {
-					cell-index = <5>;
-					node-name = "level2-nrt0-write0";
-					parent-node = <&level3_nrt0_rd_wr_sum>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-				};
-
-				level2_nrt0_read0: level2-nrt0-read0 {
-					cell-index = <6>;
-					node-name = "level2-nrt0-read0";
-					parent-node = <&level3_nrt0_rd_wr_sum>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-				};
-
-				level2_nrt1_read0: level2-nrt1-read0 {
-					cell-index = <7>;
-					node-name = "level2-nrt1-read0";
-					parent-node = <&level3_nrt1_rd_sum>;
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-					bus-width-factor = <4>;
-				};
-			};
-			level3-nodes {
-				level-index = <3>;
-				level3_rt0_wr_sum: level3-rt0-wr-sum {
-					cell-index = <0>;
-					node-name = "level3-rt0-wr-sum";
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-					ib-bw-voting-needed;
-					qcom,axi-port-mnoc {
-						interconnect-names = "cam_hf_0";
-						interconnects =
-						<&mmss_noc MASTER_CAMNOC_HF
-						&mc_virt SLAVE_EBI1>;
-					};
-				};
-
-				level3_nrt0_rd_wr_sum: level3-nrt0-rd-wr-sum {
-					cell-index = <1>;
-					node-name = "level3-nrt0-rd-wr-sum";
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-					qcom,axi-port-mnoc {
-						interconnect-names = "cam_sf_0";
-						interconnects =
-						<&mmss_noc MASTER_CAMNOC_SF
-						&mc_virt SLAVE_EBI1>;
-					};
-				};
-
-				level3_nrt1_rd_sum: level3-nrt1-rd-sum {
-					cell-index = <2>;
-					node-name = "level3-nrt1-rd-sum";
-					traffic-merge-type =
-					<CAM_CPAS_TRAFFIC_MERGE_SUM>;
-					qcom,axi-port-mnoc {
-						interconnect-names = "cam_sf_icp";
-						interconnects =
-						<&mmss_noc MASTER_CAMNOC_ICP
-						&mc_virt SLAVE_EBI1>;
-					};
 				};
 			};
 		};
