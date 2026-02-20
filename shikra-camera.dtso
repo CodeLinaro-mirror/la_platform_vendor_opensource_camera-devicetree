@@ -7,7 +7,7 @@
 /plugin/;
 
 #include "shikra-camera.dtsi"
-//#include "shikra-camera-sensor-idp.dtsi"
+#include "shikra-camera-sensor.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. Shikra Camera";
