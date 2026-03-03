@@ -172,6 +172,10 @@
 };
 
 &soc {
+	qcom,camera {
+		compatible = "qcom,camera-shikra";
+                status = "ok";
+        };
 	qcom,cam-req-mgr {
 		compatible = "qcom,cam-req-mgr";
 		status = "ok";
