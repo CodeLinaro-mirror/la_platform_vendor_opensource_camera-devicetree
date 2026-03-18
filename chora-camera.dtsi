@@ -789,6 +789,7 @@
 			compatible = "qcom,msm-cam-smmu-cb";
 			iommus = <&apps_smmu 0x14A0 0x20>,
 				 <&apps_smmu 0x1480 0x20>;
+			qcom,iova-best-fit;
 			dma-coherent;
 			qcom,iommu-faults ="non-fatal";
 			cam-smmu-label = "ife";
@@ -820,6 +821,7 @@
 				 <&apps_smmu 0x1020 0x0000>;
 			cam-smmu-label = "icp";
 			iova-region-discard = <0xe0000000 0x800000>;
+			qcom,iova-best-fit;
 			dma-coherent;
 			qcom,iommu-faults ="non-fatal";
 			memory-region = <&cam_smmu_icp_resv_region>;
@@ -873,6 +875,7 @@
 				 <&apps_smmu 0x1140 0x0000>;
 			multiple-client-devices;
 			cam-smmu-label = "cre";
+			qcom,iova-best-fit;
 			dma-coherent;
 			qcom,iommu-faults ="non-fatal";
 			memory-region = <&cam_smmu_cre_resv_region>;
@@ -898,6 +901,7 @@
 			compatible = "qcom,msm-cam-smmu-cb";
 			iommus = <&apps_smmu 0x1000 0x0000>;
 			cam-smmu-label = "cpas-cdm";
+			qcom,iova-best-fit;
 			dma-coherent;
 			qcom,iommu-faults ="non-fatal";
 			multiple-client-devices;
