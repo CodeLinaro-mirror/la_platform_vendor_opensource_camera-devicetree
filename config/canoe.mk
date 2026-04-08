@@ -22,4 +22,8 @@ dtbo-$(CONFIG_ARCH_CHORA) += chora-camera.dtbo \
 	chora-camera-sensor-qrd.dtbo \
 	chora-camera-sensor-cdp.dtbo \
 	chora-camera-sensor-rcm.dtbo
-
+dtbo-$(CONFIG_ARCH_BOURTZI) += bourtzi-camera.dtbo \
+	bourtzi-camera-sensor-mtp.dtbo \
+	bourtzi-camera-sensor-qrd.dtbo \
+	bourtzi-camera-sensor-cdp.dtbo \
+	bourtzi-camera-sensor-rcm.dtbo
