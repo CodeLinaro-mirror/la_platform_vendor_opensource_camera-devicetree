@@ -154,6 +154,7 @@
 		sensor-position-yaw = <180>;
 		eeprom-src = <&eeprom_uw>;
 		actuator-src = <&actuator_triple_uw>;
+		led-flash-src = <&led_flash_triple_rear_ultrawide>;
 		cam_vio-supply = <&L5N>;
 		cam_vdig-supply = <&L1M>;
 		cam_vana-supply = <&L3M>;
@@ -196,6 +197,7 @@
 		sensor-position-yaw = <180>;
 		eeprom-src = <&eeprom_tele>;
 		actuator-src = <&actuator_triple_tele>;
+		led-flash-src = <&led_flash_triple_rear_tele>;
 		cam_vio-supply = <&L5N>;
 		cam_vdig-supply = <&L2M>;
 		cam_vana-supply = <&L4M>;
@@ -281,6 +283,47 @@
 };
 
 &cam_cci1 {
+	led_flash_triple_rear_wide: qcom,camera-flash@0 {
+		cell-index = <0>;
+		compatible = "qcom,camera-flash";
+		cci-master = <0>;
+		flash-type = <CAM_FLASH_TYPE_I2C>;
+		cam_vio-supply = <&L5N>;
+		regulator-names = "cam_vio";
+		rgltr-cntrl-support;
+		rgltr-min-voltage = <1504000>;
+		rgltr-max-voltage = <3544000>;
+		rgltr-load-current = <120000>;
+		status = "ok";
+	};
+
+	led_flash_triple_rear_tele: qcom,camera-flash@1 {
+		cell-index = <1>;
+		compatible = "qcom,camera-flash";
+		cci-master = <0>;
+		flash-type = <CAM_FLASH_TYPE_I2C>;
+		cam_vio-supply = <&L5N>;
+		regulator-names = "cam_vio";
+		rgltr-cntrl-support;
+		rgltr-min-voltage = <1504000>;
+		rgltr-max-voltage = <3544000>;
+		rgltr-load-current = <120000>;
+		status = "ok";
+	};
+
+	led_flash_triple_rear_ultrawide: qcom,camera-flash@2 {
+		cell-index = <2>;
+		compatible = "qcom,camera-flash";
+		cci-master = <0>;
+		flash-type = <CAM_FLASH_TYPE_I2C>;
+		cam_vio-supply = <&L5N>;
+		regulator-names = "cam_vio";
+		rgltr-cntrl-support;
+		rgltr-min-voltage = <1504000>;
+		rgltr-max-voltage = <3544000>;
+		rgltr-load-current = <120000>;
+		status = "ok";
+	};
 
 	actuator_triple_wide: qcom,actuator1 {
 		cell-index = <1>;
@@ -341,6 +384,7 @@
 		sensor-position-yaw = <180>;
 		eeprom-src = <&eeprom_wide>;
 		actuator-src = <&actuator_triple_wide>;
+		led-flash-src = <&led_flash_triple_rear_wide>;
 		cam_vio-supply = <&L5N>;
 		cam_vdig-supply = <&L1N>;
 		cam_vana-supply = <&L6M>;
