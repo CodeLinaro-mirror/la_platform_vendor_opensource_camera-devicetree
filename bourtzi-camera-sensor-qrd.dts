@@ -8,7 +8,7 @@
 
 #include <dt-bindings/clock/qcom,sm4450-gcc.h>
 #include <dt-bindings/clock/qcom,sm4450-camcc.h>
-#include <dt-bindings/interconnect/qcom,bourtzi.h>
+#include <dt-bindings/interconnect/qcom,ravelin.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
 #include "bourtzi-camera-sensor-mtp.dtsi"
