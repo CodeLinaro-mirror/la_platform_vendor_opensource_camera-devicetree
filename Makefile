@@ -1,4 +1,4 @@
-ifeq ($(CONFIG_ARCH_SHIKRA), y)
+ifeq ($(TARGET_BOARD_PLATFORM),shikra)
 DTBS_TARGETS += shikra-camera.dtbo
 CAMERA_KERNEL_ROOT := ${ANDROID_BUILD_TOP}/vendor/qcom/opensource/camera-kernel/camera
 CAMERA_KERNEL_INCLUDE := ${CAMERA_KERNEL_ROOT}

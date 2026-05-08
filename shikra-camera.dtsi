@@ -279,7 +279,7 @@
 
 &soc {
 	qcom,camera {
-		compatible = "qcom,camera-shikra";
+		compatible = "qcom,camera_shikra";
                 status = "ok";
         };
 	qcom,cam-req-mgr {
@@ -289,60 +289,6 @@
 
 	qcom,cam-sync {
 		compatible = "qcom,cam-sync";
-		status = "ok";
-	};
-
-	cam_csiphy_tpg3: qcom,tpg3@5c66000 {
-		cell-index = <3>;
-		phy-id = <0>;
-		compatible = "qcom,cam-tpg101";
-		reg-names = "tpg0", "cam_cpas_top";
-		reg = <0x5c66000 0x400>,
-			<0x5c11000 0x1000>;
-		reg-cam-base = <0x66000 0x11000>;
-		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
-		interrupt-names = "tpg0";
-		interrupts = <GIC_SPI 309 IRQ_TYPE_EDGE_RISING>;
-		shared-clks = <1 0>;
-		clock-names =
-			"cphy_rx_clk_src",
-			"tfe_0_cphy_rx_clk",
-			"gcc_camss_cphy_0_clk";
-		clocks =
-			<&gcc GCC_CAMSS_TFE_CPHY_RX_CLK_SRC>,
-			<&gcc GCC_CAMSS_TFE_0_CPHY_RX_CLK>,
-			<&gcc GCC_CAMSS_CPHY_0_CLK>;
-		clock-rates =
-			<240000000 0 0>;
-		clock-cntl-level = "lowsvs";
-		src-clock-name = "cphy_rx_clk_src";
-		status = "ok";
-	};
-
-	cam_csiphy_tpg4: qcom,tpg4@5c68000 {
-		cell-index = <4>;
-		phy-id = <1>;
-		compatible = "qcom,cam-tpg101";
-		reg-names = "tpg1", "cam_cpas_top";
-		reg = <0x5c68000 0x400>,
-			<0x5c11000 0x1000>;
-		reg-cam-base = <0x68000 0x11000>;
-		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
-		interrupt-names = "tpg1";
-		interrupts = <GIC_SPI 310 IRQ_TYPE_EDGE_RISING>;
-		shared-clks = <1 0>;
-		clock-names =
-			"cphy_rx_clk_src",
-			"tfe_1_cphy_rx_clk",
-			"gcc_camss_cphy_1_clk";
-		clocks =
-			<&gcc GCC_CAMSS_TFE_CPHY_RX_CLK_SRC>,
-			<&gcc GCC_CAMSS_TFE_1_CPHY_RX_CLK>,
-			<&gcc GCC_CAMSS_CPHY_1_CLK>;
-		clock-rates =
-			<240000000 0 0>;
-		clock-cntl-level = "lowsvs";
-		src-clock-name = "cphy_rx_clk_src";
 		status = "ok";
 	};
 
@@ -527,8 +473,8 @@
 
 		msm_cam_smmu_ope {
 			compatible = "qcom,msm-cam-smmu-cb";
-			iommus = <&apps_smmu 0x820 0x000>,
-				<&apps_smmu 0x840 0x000>;
+			iommus = <&apps_smmu 0x620 0x000>,
+				<&apps_smmu 0x640 0x000>;
 			qcom,iommu-faults = "non-fatal";
 			multiple-client-devices;
 			qcom,iommu-dma-addr-pool = <0x7400000 0xd8c00000>;
@@ -546,7 +492,7 @@
 
 		msm_cam_smmu_cpas_cdm {
 			compatible = "qcom,msm-cam-smmu-cb";
-			iommus = <&apps_smmu 0x800 0x000>;
+			iommus = <&apps_smmu 0x600 0x000>;
 			cam-smmu-label = "cpas-cdm";
 			qcom,iommu-faults = "non-fatal";
 			qcom,iommu-dma-addr-pool = <0x7400000 0xd8c00000>;
@@ -851,7 +797,7 @@
 		cam-icc-path-names = "cam_ahb";
 		interconnect-names = "cam_ahb", "cam_hf_0", "cam_sf_0";
                 interconnects =
-				    <&clk_virt MASTER_AMPSS_M0 &config_noc SLAVE_CAMERA_CFG>,
+				    <&mem_noc MASTER_AMPSS_M0 &config_noc SLAVE_CAMERA_CFG>,
                     <&mmrt_virt MASTER_CAMNOC_HF &mc_virt SLAVE_EBI_CH0>,
                     <&mmnrt_virt MASTER_CAMNOC_SF &mc_virt SLAVE_EBI_CH0>;
                 cam-ahb-num-cases = <7>;
@@ -881,7 +827,7 @@
 			"csiphy0", "csiphy1", "cci0",
 			"csid0", "csid1", "tfe0",
 			"tfe1", "ope0", "cam-cdm-intf0",
-			"cpas-cdm0", "ope-cdm0", "tpg3", "tpg4";
+			"cpas-cdm0", "ope-cdm0";
 
 		camera-bus-nodes {
 			level2-nodes {
