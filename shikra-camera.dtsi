@@ -8,6 +8,7 @@
 #include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
 #include <dt-bindings/clock/qcom,shikra-gcc.h>
 #include <dt-bindings/interconnect/qcom,shikra.h>
+#include <dt-bindings/arm/msm/qti-smmu-proxy-dt-ids.h>
 
 &tlmm {
 	cci_i2c_sda0_active: cci_i2c_sda0_active {
@@ -511,6 +512,7 @@
 			compatible = "qcom,msm-cam-smmu-cb";
 			cam-smmu-label = "cam-secure";
 			qcom,secure-cb;
+			qti,smmu-proxy-cb-id = <QTI_SMMU_PROXY_CAMERA_CB>;
 		};
 	};
 
