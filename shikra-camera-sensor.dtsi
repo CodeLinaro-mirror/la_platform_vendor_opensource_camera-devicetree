@@ -284,5 +284,82 @@
 		clock-rates = <19200000>;
 		status = "ok";
 	};
+
+	/*cam0: IMX577 - 22pin connector*/
+	qcom,cam-sensor3 {
+		cell-index = <3>;
+		compatible = "qcom,cam-sensor";
+		csiphy-sd-index = <0>;
+		sensor-position-roll = <0>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <120000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk0_active
+		                &cam_sensor_active_rst0>;
+		pinctrl-1 = <&cam_sensor_mclk0_suspend
+		                &cam_sensor_suspend_rst0>;
+		gpios = <&tlmm 34 0>,
+			<&tlmm 32 0>;
+		gpio-reset = <1>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags   	 = <1 0>;
+		gpio-req-tbl-label = "CAM_MCLK0",
+		                       "CAMIF_RESET0";
+		cci-master = <0>;
+		clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <24000000>;
+		status = "ok";
+	};
+
+	/*cam1: IMX577 - 22pin connector*/
+	qcom,cam-sensor4 {
+		cell-index = <4>;
+		compatible = "qcom,cam-sensor";
+		csiphy-sd-index = <1>;
+		sensor-position-roll = <0>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
+		eeprom-src = <&eeprom_cam1>;
+		actuator-src = <&actuator_cam1>;
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <120000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk1_active
+		                &cam_sensor_active_rst1>;
+		pinctrl-1 = <&cam_sensor_mclk1_suspend
+		                &cam_sensor_suspend_rst1>;
+		gpios = <&tlmm 35 0>,
+			<&tlmm 33 0>;
+		gpio-reset = <1>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags   	 = <1 0>;
+		gpio-req-tbl-label = "CAM_MCLK1",
+		                       "CAMIF_RESET1";
+		cci-master = <1>;
+		clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <24000000>;
+		status = "ok";
+	};
+
 };
 
