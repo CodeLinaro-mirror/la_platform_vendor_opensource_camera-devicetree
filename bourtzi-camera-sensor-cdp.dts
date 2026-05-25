@@ -17,5 +17,5 @@
 	model = "Qualcomm Technologies, Inc. Bourtzi CDP + WCN3998 + cottid";
 	compatible = "qcom,bourtzi-cdp", "qcom,cdp", "qcom,bourtzi";
 	qcom,msm-id = <776 0x10000>, <777 0x10000>;
-	qcom,board-id = <0x10001 0x0>, <0x20001 0x0>;
+	qcom,board-id = <0x10001 0x0>, <0x10001 0x600>, <0x20001 0x0>, <0x20001 0x600>;
 };
