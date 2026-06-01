@@ -1546,10 +1546,10 @@
 		clock-control-debugfs = "true";
 		fw_name = "CAMERA_ICP_v2";
 		fw-pas-id = <33>;
-		ubwc-ipe-fetch-cfg = <0x7173 0x717b>;
-		ubwc-ipe-write-cfg = <0x161cf 0x161ef>;
-		ubwc-bps-fetch-cfg = <0x7173 0x717b>;
-		ubwc-bps-write-cfg = <0x161cf 0x161ef>;
+		ubwc-ipe-fetch-cfg = <0x6173 0x617b>;
+		ubwc-ipe-write-cfg = <0x61cf 0x61ef>;
+		ubwc-bps-fetch-cfg = <0x6173 0x617b>;
+		ubwc-bps-write-cfg = <0x61cf 0x61ef>;
 		qos-val = <0x00000A0A>;
 		cam_hw_pid = <11>;
 		status = "okay";
