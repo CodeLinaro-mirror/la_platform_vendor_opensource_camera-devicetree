@@ -361,5 +361,96 @@
 		status = "ok";
 	};
 
+	actuator_cam5: qcom,actuator5 {
+		cell-index = <5>;
+		compatible = "qcom,actuator";
+		cci-master = <0>;
+		cam_vaf-supply = <&L15A>;
+		regulator-names = "cam_vaf";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		status = "ok";
+	};
+
+	/*EEPROM5: IMX858 for ITPS*/
+	eeprom_cam5: qcom,eeprom5 {
+		cell-index = <5>;
+		compatible = "qcom,eeprom";
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk0_active
+		                &cam_sensor_active_rst0>;
+		pinctrl-1 = <&cam_sensor_mclk0_suspend
+		                &cam_sensor_suspend_rst0>;
+		gpios = <&tlmm 34 0>,
+			<&tlmm 32 0>,
+			<&tlmm 144 0>;
+		gpio-reset = <1>;
+		gpio-custom1 = <2>;
+		gpio-req-tbl-num = <0 1 2>;
+		gpio-req-tbl-flags   	 = <1 0 0>;
+		gpio-req-tbl-label = "CAM_MCLK5",
+		                       "CAMIF_RESET5",
+		                         "CAM_CUSTOM5";
+		cci-master = <0>;
+		clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <19200000>;
+		status = "ok";
+	};
+	/*cam5: IMX858 for ITPS (CSI0) */
+	qcom,cam-sensor5 {
+		cell-index = <5>;
+		compatible = "qcom,cam-sensor";
+		csiphy-sd-index = <0>;
+		sensor-position-roll = <0>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
+		eeprom-src = <&eeprom_cam5>;
+		actuator-src = <&actuator_cam5>;
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk0_active
+		                &cam_sensor_active_rst0>;
+		pinctrl-1 = <&cam_sensor_mclk0_suspend
+		                &cam_sensor_suspend_rst0>;
+		gpios = <&tlmm 34 0>,
+			<&tlmm 32 0>,
+			<&tlmm 144 0>;
+		gpio-reset = <1>;
+		gpio-custom1 = <2>;
+		gpio-req-tbl-num = <0 1 2>;
+		gpio-req-tbl-flags   	 = <1 0 0>;
+		gpio-req-tbl-label = "CAM_MCLK5",
+		                       "CAMIF_RESET5",
+		                         "CAM_CUSTOM5";
+		cci-master = <0>;
+		clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <19200000>;
+		status = "ok";
+	};
+
 };
 
