@@ -8,6 +8,7 @@
 #include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
 #include <dt-bindings/clock/qcom,shikra-gcc.h>
 #include <dt-bindings/interconnect/qcom,shikra.h>
+#include <dt-bindings/arm/msm/qti-smmu-proxy-dt-ids.h>
 
 &tlmm {
 	cci_i2c_sda0_active: cci_i2c_sda0_active {
@@ -170,6 +171,58 @@
 		};
 	};
 
+	cam_sensor_mclk2_active: cam_sensor_mclk2_active {
+                mux {
+                        pins = "gpio96";
+                        function = "cam_mclk";
+                };
+
+                config {
+                        pins = "gpio96";
+                        bias-disable;
+                        drive-strength = <2>;
+                };
+        };
+
+        cam_sensor_mclk2_suspend: cam_sensor_mclk2_suspend {
+                mux {
+                        pins = "gpio96";
+                        function = "cam_mclk";
+                };
+
+                config {
+                        pins = "gpio96";
+                        bias-pull-down;
+                        drive-strength = <2>;
+                };
+        };
+
+	cam_sensor_mclk3_active: cam_sensor_mclk3_active {
+                mux {
+                        pins = "gpio98";
+                        function = "cam_mclk";
+                };
+
+                config {
+                        pins = "gpio98";
+                        bias-disable;
+                        drive-strength = <2>;
+                };
+        };
+
+        cam_sensor_mclk3_suspend: cam_sensor_mclk3_suspend {
+                mux {
+                        pins = "gpio98";
+                        function = "cam_mclk";
+                };
+
+                config {
+                        pins = "gpio98";
+                        bias-pull-down;
+                        drive-strength = <2>;
+                };
+        };
+
         cam_sensor_active_rst0: cam_sensor_active_rst0 {
                 mux {
                         pins = "gpio32";
@@ -227,7 +280,7 @@
 
 &soc {
 	qcom,camera {
-		compatible = "qcom,camera-shikra";
+		compatible = "qcom,camera_shikra";
                 status = "ok";
         };
 	qcom,cam-req-mgr {
@@ -237,56 +290,6 @@
 
 	qcom,cam-sync {
 		compatible = "qcom,cam-sync";
-		status = "ok";
-	};
-
-	cam_csiphy_tpg3: qcom,tpg3@5c66000 {
-		cell-index = <3>;
-		phy-id = <0>;
-		compatible = "qcom,cam-tpg101";
-		reg-names = "tpg0", "cam_cpas_top";
-		reg = <0x5c66000 0x400>,
-			<0x5c11000 0x1000>;
-		reg-cam-base = <0x66000 0x11000>;
-		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
-		interrupt-names = "tpg0";
-		interrupts = <GIC_SPI 275 IRQ_TYPE_EDGE_RISING>;
-		shared-clks = <1 0>;
-		clock-names =
-			"cphy_rx_clk_src",
-			"tfe_0_cphy_rx_clk";
-		clocks =
-			<&gcc GCC_CAMSS_TFE_CPHY_RX_CLK_SRC>,
-			<&gcc GCC_CAMSS_TFE_0_CPHY_RX_CLK>;
-		clock-rates =
-			<240000000 0>;
-		clock-cntl-level = "lowsvs";
-		src-clock-name = "cphy_rx_clk_src";
-		status = "ok";
-	};
-	
-	cam_csiphy_tpg4: qcom,tpg4@5c68000 {
-		cell-index = <4>;
-		phy-id = <1>;
-		compatible = "qcom,cam-tpg101";
-		reg-names = "tpg1", "cam_cpas_top";
-		reg = <0x5c68000 0x400>,
-			<0x5c11000 0x1000>;
-		reg-cam-base = <0x68000 0x11000>;
-		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
-		interrupt-names = "tpg1";
-		interrupts = <GIC_SPI 276 IRQ_TYPE_EDGE_RISING>;
-		shared-clks = <1 0>;
-		clock-names =
-			"cphy_rx_clk_src",
-			"tfe_1_cphy_rx_clk";
-		clocks =
-			<&gcc GCC_CAMSS_TFE_CPHY_RX_CLK_SRC>,
-			<&gcc GCC_CAMSS_TFE_1_CPHY_RX_CLK>;
-		clock-rates =
-			<240000000 0>;
-		clock-cntl-level = "lowsvs";
-		src-clock-name = "cphy_rx_clk_src";
 		status = "ok";
 	};
 
@@ -304,7 +307,7 @@
 		rgltr-cntrl-support;
 		rgltr-min-voltage = <1200000>;
 		rgltr-max-voltage = <1200000>;
-		rgltr-load-current = <124270>;
+		rgltr-load-current = <26720>;
 		shared-clks = <1 0 0 0>;
 		clock-names = "cphy_rx_clk_src",
 			"csiphy0_clk",
@@ -314,10 +317,13 @@
 			<&gcc GCC_CAMSS_CPHY_0_CLK>,
 			<&gcc GCC_CAMSS_CSI0PHYTIMER_CLK_SRC>,
 			<&gcc GCC_CAMSS_CSI0PHYTIMER_CLK>;
-		src-clock-name = "cphy_rx_clk_src";
-		clock-cntl-level = "lowsvs";
+		src-clock-name = "csi0phytimer_clk_src";
+		clock-cntl-level = "lowsvs", "svs", "nominal", "turbo";
 		clock-rates =
-			<240000000 0 200000000 0>;
+			<19200000 0 19200000 0>,
+			<240000000 0 200000000 0>,
+			<341330000 0 268800000 0>,
+			<384000000 0 268800000 0>;
 		status = "ok";
 	};
 	cam_csiphy1: qcom,csiphy1@5c53000 {
@@ -334,7 +340,7 @@
 		rgltr-cntrl-support;
 		rgltr-min-voltage = <1200000>;
 		rgltr-max-voltage = <1200000>;
-		rgltr-load-current = <124270>;
+		rgltr-load-current = <26720>;
 		shared-clks = <1 0 0 0>;
 		clock-names = "cphy_rx_clk_src",
 			"csiphy1_clk",
@@ -344,10 +350,13 @@
 			<&gcc GCC_CAMSS_CPHY_1_CLK>,
 			<&gcc GCC_CAMSS_CSI1PHYTIMER_CLK_SRC>,
 			<&gcc GCC_CAMSS_CSI1PHYTIMER_CLK>;
-		src-clock-name = "cphy_rx_clk_src";
-		clock-cntl-level = "lowsvs";
+		src-clock-name = "csi1phytimer_clk_src";
+		clock-cntl-level = "lowsvs", "svs", "nominal", "turbo";
 		clock-rates =
-			<240000000 0 200000000 0>;
+			<19200000 0 19200000 0>,
+                        <240000000 0 200000000 0>,
+                        <341330000 0 268800000 0>,
+                        <384000000 0 268800000 0>;
 		status = "ok";
 	};
 
@@ -360,15 +369,17 @@
 		reg-names = "cci";
 		reg-cam-base = <0x1b000>;
 		interrupt-names = "cci0";
-		interrupts = <GIC_SPI 238 IRQ_TYPE_EDGE_RISING>;
+		interrupts = <GIC_SPI 206 IRQ_TYPE_EDGE_RISING>;
 		status = "ok";
 		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
 		clock-names = "cci_0_clk_src",
 			"cci_0_clk";
 		clocks = <&gcc GCC_CAMSS_CCI_CLK_SRC>,
 			<&gcc GCC_CAMSS_CCI_0_CLK>;
-		clock-rates = <37500000 0>;
-		clock-cntl-level = "lowsvs";
+		clock-rates =
+				<19200000 0>,
+				<37500000 0>;
+		clock-cntl-level = "lowsvs", "svs";
 		src-clock-name = "cci_0_clk_src";
 		pctrl-idx-mapping = <CCI_MASTER_0 CCI_MASTER_1>;
 		pctrl-map-names = "m0", "m1";
@@ -378,16 +389,6 @@
 		pinctrl-1 = <&cci_i2c_scl0_suspend &cci_i2c_sda0_suspend>;
 		pinctrl-2 = <&cci_i2c_scl1_active &cci_i2c_sda1_active>;
 		pinctrl-3 = <&cci_i2c_scl1_suspend &cci_i2c_sda1_suspend>;
-		gpios = <&tlmm 36 0>,
-			<&tlmm 37 0>,
-			<&tlmm 41 0>,
-			<&tlmm 42 0>;
-		gpio-req-tbl-num = <0 1 2 3>;
-		gpio-req-tbl-flags = <1 1 1 1>;
-		gpio-req-tbl-label = "CCI_I2C_DATA0",
-					"CCI_I2C_CLK0",
-					"CCI_I2C_DATA1",
-					"CCI_I2C_CLK1";
 
 		i2c_freq_100Khz_cci0: qcom,i2c_standard_mode {
 			hw-thigh = <201>;
@@ -473,8 +474,8 @@
 
 		msm_cam_smmu_ope {
 			compatible = "qcom,msm-cam-smmu-cb";
-			iommus = <&apps_smmu 0x820 0x000>,
-				<&apps_smmu 0x840 0x000>;
+			iommus = <&apps_smmu 0x620 0x000>,
+				<&apps_smmu 0x640 0x000>;
 			qcom,iommu-faults = "non-fatal";
 			multiple-client-devices;
 			qcom,iommu-dma-addr-pool = <0x7400000 0xd8c00000>;
@@ -492,7 +493,7 @@
 
 		msm_cam_smmu_cpas_cdm {
 			compatible = "qcom,msm-cam-smmu-cb";
-			iommus = <&apps_smmu 0x800 0x000>;
+			iommus = <&apps_smmu 0x600 0x000>;
 			cam-smmu-label = "cpas-cdm";
 			qcom,iommu-faults = "non-fatal";
 			qcom,iommu-dma-addr-pool = <0x7400000 0xd8c00000>;
@@ -511,6 +512,7 @@
 			compatible = "qcom,msm-cam-smmu-cb";
 			cam-smmu-label = "cam-secure";
 			qcom,secure-cb;
+			qti,smmu-proxy-cb-id = <QTI_SMMU_PROXY_CAMERA_CB>;
 		};
 	};
 
@@ -604,15 +606,16 @@
 			<&gcc GCC_CAMSS_TFE_0_CLK_SRC>,
 			<&gcc GCC_CAMSS_TFE_0_CLK>;
 		clock-rates =
+			<19200000 0 19200000 0 19200000 0>,
 			<240000000 0 240000000 0 256000000 0>,
 			<384000000 0 341333333 0 460800000 0>,
 			<426400000 0 384000000 0 576000000 0>;
-		clock-cntl-level = "svs", "svs_l1", "turbo";
+		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "tfe_csid_clk_src";
 		clock-control-debugfs = "true";
 		status = "ok";
 	};
-	
+
 	cam_tfe0: qcom,tfe0@5c6e000 {
 		cell-index = <0>;
 		compatible = "qcom,tfe530";
@@ -629,10 +632,11 @@
 			<&gcc GCC_CAMSS_TFE_0_CLK_SRC>,
 			<&gcc GCC_CAMSS_TFE_0_CLK>;
 		clock-rates =
+			<19200000 0>,
 			<256000000 0>,
 			<460800000 0>,
 			<576000000 0>;
-		clock-cntl-level = "svs", "svs_l1", "turbo";
+		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "tfe_clk_src";
 		clock-control-debugfs = "true";
 		status = "ok";
@@ -664,10 +668,11 @@
 			<&gcc GCC_CAMSS_TFE_1_CLK_SRC>,
 			<&gcc GCC_CAMSS_TFE_1_CLK>;
 		clock-rates =
+			<19200000 0 19200000 0 19200000 0>,
 			<240000000 0 240000000 0 256000000 0>,
 			<384000000 0 341333333 0 460800000 0>,
 			<426400000 0 384000000 0 576000000 0>;
-		clock-cntl-level = "svs", "svs_l1", "turbo";
+		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "tfe_csid_clk_src";
 		clock-control-debugfs = "true";
 		status = "ok";
@@ -689,10 +694,11 @@
 			<&gcc GCC_CAMSS_TFE_1_CLK_SRC>,
 			<&gcc GCC_CAMSS_TFE_1_CLK>;
 		clock-rates =
+			<19200000 0>,
 			<256000000 0>,
 			<460800000 0>,
 			<576000000 0>;
-		clock-cntl-level = "svs", "svs_l1", "turbo";
+		clock-cntl-level = "lowsvs", "svs", "svs_l1", "turbo";
 		src-clock-name = "tfe_clk_src";
 		clock-control-debugfs = "true";
 		status = "ok";
@@ -737,11 +743,12 @@
 			<&gcc GCC_CAMSS_OPE_CLK_SRC>,
 			<&gcc GCC_CAMSS_OPE_CLK>;
 		clock-rates =
+			<19200000 0 19200000 0>,
 			<171428571 0 200000000 0>,
 			<171428571 0 266600000 0>,
 			<240000000 0 465000000 0>,
 			<240000000 0 580000000 0>;
-		clock-cntl-level = "svs", "svs_l1", "nominal", "turbo";
+		clock-cntl-level = "lowsvs", "svs", "svs_l1", "nominal", "turbo";
 		src-clock-name = "ope_clk_src";
 		clock-control-debugfs = "true";
 		status = "ok";
@@ -778,21 +785,21 @@
 		src-clock-name = "gcc_camss_axi_clk_src";
 		clock-rates =
                         <0        0 0         0 0 0>,
-                        <0 80000000 0  19200000 0 0>,
+                        <0 19000000 0  19200000 0 0>,
                         <0 80000000 0 150000000 0 0>,
                         <0 80000000 0 200000000 0 0>,
                         <0 80000000 0 300000000 0 0>,
                         <0 80000000 0 300000000 0 0>,
                         <0 80000000 0 300000000 0 0>;
-                clock-cntl-level = "suspend", "minsvs", "lowsvs", "svs",
-			"svs_l1", "nominal", "turbo";
+                clock-cntl-level = "suspend", "lowsvs", "svs",
+			"svs_l1", "nominal","nominal_l1", "turbo";
 		control-camnoc-axi-clk;
 		camnoc-bus-width = <32>;
 		camnoc-axi-clk-bw-margin-perc = <20>;
 		cam-icc-path-names = "cam_ahb";
 		interconnect-names = "cam_ahb", "cam_hf_0", "cam_sf_0";
                 interconnects =
-				    <&clk_virt MASTER_AMPSS_M0 &config_noc SLAVE_CAMERA_CFG>,
+				    <&mem_noc MASTER_AMPSS_M0 &config_noc SLAVE_CAMERA_CFG>,
                     <&mmrt_virt MASTER_CAMNOC_HF &mc_virt SLAVE_EBI_CH0>,
                     <&mmnrt_virt MASTER_CAMNOC_SF &mc_virt SLAVE_EBI_CH0>;
                 cam-ahb-num-cases = <7>;
@@ -822,7 +829,7 @@
 			"csiphy0", "csiphy1", "cci0",
 			"csid0", "csid1", "tfe0",
 			"tfe1", "ope0", "cam-cdm-intf0",
-			"cpas-cdm0", "ope-cdm0", "tpg3", "tpg4";
+			"cpas-cdm0", "ope-cdm0";
 
 		camera-bus-nodes {
 			level2-nodes {

@@ -1,4 +1,4 @@
-ifeq ($(CONFIG_ARCH_SHIKRA), y)
+ifeq ($(TARGET_BOARD_PLATFORM),shikra)
 dtbo-y += shikra-camera.dtbo
 endif
 

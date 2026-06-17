@@ -12,14 +12,24 @@
 };
 
 &cam_cci0 {
-	/*cam0: OV13B10*/
-	qcom,cam-sensor0 {
+	actuator_cam0: qcom,actuator0 {
 		cell-index = <0>;
-		compatible = "qcom,cam-sensor";
-		csiphy-sd-index = <0>;
-		sensor-position-roll = <0>;
-		sensor-position-pitch = <0>;
-		sensor-position-yaw = <180>;
+		compatible = "qcom,actuator";
+		cci-master = <0>;
+		cam_vaf-supply = <&L15A>;
+		regulator-names = "cam_vaf";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		status = "ok";
+	};
+
+	/*EEPROM00: OV13B10*/
+	eeprom_cam0: qcom,eeprom0 {
+		cell-index = <0>;
+		compatible = "qcom,eeprom";
 		cam_vio-supply = <&L15A>;
 		regulator-names = "cam_vio";
 		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
@@ -51,14 +61,16 @@
 		clock-rates = <24000000>;
 		status = "ok";
 	};
-	/*cam1: OV13B10 for eITP/ITP; IMX858 for ITPS */
-	qcom,cam-sensor1 {
-		cell-index = <1>;
+	/*cam0: OV13B10*/
+	qcom,cam-sensor0 {
+		cell-index = <0>;
 		compatible = "qcom,cam-sensor";
-		csiphy-sd-index = <1>;
+		csiphy-sd-index = <0>;
 		sensor-position-roll = <0>;
 		sensor-position-pitch = <0>;
 		sensor-position-yaw = <180>;
+		eeprom-src = <&eeprom_cam0>;
+		actuator-src = <&actuator_cam0>;
 		cam_vio-supply = <&L15A>;
 		regulator-names = "cam_vio";
 		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
@@ -73,6 +85,56 @@
 		                &cam_sensor_active_rst0>;
 		pinctrl-1 = <&cam_sensor_mclk0_suspend
 		                &cam_sensor_suspend_rst0>;
+		gpios = <&tlmm 34 0>,
+			<&tlmm 32 0>,
+			<&tlmm 144 0>;
+		gpio-reset = <1>;
+		gpio-custom1 = <2>;
+		gpio-req-tbl-num = <0 1 2>;
+		gpio-req-tbl-flags   	 = <1 0 0>;
+		gpio-req-tbl-label = "CAM_MCLK0",
+		                       "CAMIF_RESET0",
+		                         "CAM_CUSTOM1";
+		cci-master = <0>;
+		clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <24000000>;
+		status = "ok";
+	};
+
+	actuator_cam1: qcom,actuator1 {
+		cell-index = <1>;
+		compatible = "qcom,actuator";
+		cci-master = <1>;
+		cam_vaf-supply = <&L15A>;
+		regulator-names = "cam_vaf";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		status = "ok";
+	};
+
+	/*EEPROM1: OV13B10 for eITP/ITP*/
+	eeprom_cam1: qcom,eeprom1 {
+		cell-index = <1>;
+		compatible = "qcom,eeprom";
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk1_active
+		                &cam_sensor_active_rst1>;
+		pinctrl-1 = <&cam_sensor_mclk1_suspend
+		                &cam_sensor_suspend_rst1>;
 		gpios = <&tlmm 35 0>,
 			<&tlmm 33 0>,
 			<&tlmm 148 0>;
@@ -84,11 +146,311 @@
 		                       "CAMIF_RESET1",
 		                         "CAM_CUSTOM1";
 		cci-master = <1>;
+		clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <24000000>;
+		status = "ok";
+	};
+	/*cam1: OV13B10 for eITP/ITP*/
+	qcom,cam-sensor1 {
+		cell-index = <1>;
+		compatible = "qcom,cam-sensor";
+		csiphy-sd-index = <1>;
+		sensor-position-roll = <0>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
+		eeprom-src = <&eeprom_cam1>;
+		actuator-src = <&actuator_cam1>;
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk1_active
+		                &cam_sensor_active_rst1>;
+		pinctrl-1 = <&cam_sensor_mclk1_suspend
+		                &cam_sensor_suspend_rst1>;
+		gpios = <&tlmm 35 0>,
+			<&tlmm 33 0>,
+			<&tlmm 148 0>;
+		gpio-reset = <1>;
+		gpio-custom1 = <2>;
+		gpio-req-tbl-num = <0 1 2>;
+		gpio-req-tbl-flags   	 = <1 0 0>;
+		gpio-req-tbl-label = "CAM_MCLK1",
+		                       "CAMIF_RESET1",
+		                         "CAM_CUSTOM1";
+		cci-master = <1>;
+		clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <24000000>;
+		status = "ok";
+	};
+
+	actuator_cam2: qcom,actuator2 {
+		cell-index = <2>;
+		compatible = "qcom,actuator";
+		cci-master = <1>;
+		cam_vaf-supply = <&L15A>;
+		regulator-names = "cam_vaf";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		status = "ok";
+	};
+
+	/*EEPROM1: IMX858 for ITPS*/
+	eeprom_cam2: qcom,eeprom2 {
+		cell-index = <2>;
+		compatible = "qcom,eeprom";
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk1_active
+		                &cam_sensor_active_rst1>;
+		pinctrl-1 = <&cam_sensor_mclk1_suspend
+		                &cam_sensor_suspend_rst1>;
+		gpios = <&tlmm 35 0>,
+			<&tlmm 33 0>,
+			<&tlmm 148 0>;
+		gpio-reset = <1>;
+		gpio-custom1 = <2>;
+		gpio-req-tbl-num = <0 1 2>;
+		gpio-req-tbl-flags   	 = <1 0 0>;
+		gpio-req-tbl-label = "CAM_MCLK2",
+		                       "CAMIF_RESET2",
+		                         "CAM_CUSTOM2";
+		cci-master = <1>;
+		clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <19200000>;
+		status = "ok";
+	};
+	/*cam1: IMX858 for ITPS*/
+	qcom,cam-sensor2 {
+		cell-index = <2>;
+		compatible = "qcom,cam-sensor";
+		csiphy-sd-index = <1>;
+		sensor-position-roll = <0>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
+		eeprom-src = <&eeprom_cam2>;
+		actuator-src = <&actuator_cam2>;
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk1_active
+		                &cam_sensor_active_rst1>;
+		pinctrl-1 = <&cam_sensor_mclk1_suspend
+		                &cam_sensor_suspend_rst1>;
+		gpios = <&tlmm 35 0>,
+			<&tlmm 33 0>,
+			<&tlmm 148 0>;
+		gpio-reset = <1>;
+		gpio-custom1 = <2>;
+		gpio-req-tbl-num = <0 1 2>;
+		gpio-req-tbl-flags   	 = <1 0 0>;
+		gpio-req-tbl-label = "CAM_MCLK2",
+		                       "CAMIF_RESET2",
+		                         "CAM_CUSTOM2";
+		cci-master = <1>;
+		clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <19200000>;
+		status = "ok";
+	};
+
+	/*cam0: IMX577 - 22pin connector*/
+	qcom,cam-sensor3 {
+		cell-index = <3>;
+		compatible = "qcom,cam-sensor";
+		csiphy-sd-index = <0>;
+		sensor-position-roll = <0>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <120000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk0_active
+		                &cam_sensor_active_rst0>;
+		pinctrl-1 = <&cam_sensor_mclk0_suspend
+		                &cam_sensor_suspend_rst0>;
+		gpios = <&tlmm 34 0>,
+			<&tlmm 32 0>;
+		gpio-reset = <1>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags   	 = <1 0>;
+		gpio-req-tbl-label = "CAM_MCLK0",
+		                       "CAMIF_RESET0";
+		cci-master = <0>;
 		clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
 		clock-names = "cam_clk";
 		clock-cntl-level = "nominal";
 		clock-rates = <24000000>;
 		status = "ok";
 	};
+
+	/*cam1: IMX577 - 22pin connector*/
+	qcom,cam-sensor4 {
+		cell-index = <4>;
+		compatible = "qcom,cam-sensor";
+		csiphy-sd-index = <1>;
+		sensor-position-roll = <0>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
+		eeprom-src = <&eeprom_cam1>;
+		actuator-src = <&actuator_cam1>;
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <120000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk1_active
+		                &cam_sensor_active_rst1>;
+		pinctrl-1 = <&cam_sensor_mclk1_suspend
+		                &cam_sensor_suspend_rst1>;
+		gpios = <&tlmm 35 0>,
+			<&tlmm 33 0>;
+		gpio-reset = <1>;
+		gpio-req-tbl-num = <0 1>;
+		gpio-req-tbl-flags   	 = <1 0>;
+		gpio-req-tbl-label = "CAM_MCLK1",
+		                       "CAMIF_RESET1";
+		cci-master = <1>;
+		clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <24000000>;
+		status = "ok";
+	};
+
+	actuator_cam5: qcom,actuator5 {
+		cell-index = <5>;
+		compatible = "qcom,actuator";
+		cci-master = <0>;
+		cam_vaf-supply = <&L15A>;
+		regulator-names = "cam_vaf";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		status = "ok";
+	};
+
+	/*EEPROM5: IMX858 for ITPS*/
+	eeprom_cam5: qcom,eeprom5 {
+		cell-index = <5>;
+		compatible = "qcom,eeprom";
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk0_active
+		                &cam_sensor_active_rst0>;
+		pinctrl-1 = <&cam_sensor_mclk0_suspend
+		                &cam_sensor_suspend_rst0>;
+		gpios = <&tlmm 34 0>,
+			<&tlmm 32 0>,
+			<&tlmm 144 0>;
+		gpio-reset = <1>;
+		gpio-custom1 = <2>;
+		gpio-req-tbl-num = <0 1 2>;
+		gpio-req-tbl-flags   	 = <1 0 0>;
+		gpio-req-tbl-label = "CAM_MCLK5",
+		                       "CAMIF_RESET5",
+		                         "CAM_CUSTOM5";
+		cci-master = <0>;
+		clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <19200000>;
+		status = "ok";
+	};
+	/*cam5: IMX858 for ITPS (CSI0) */
+	qcom,cam-sensor5 {
+		cell-index = <5>;
+		compatible = "qcom,cam-sensor";
+		csiphy-sd-index = <0>;
+		sensor-position-roll = <0>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
+		eeprom-src = <&eeprom_cam5>;
+		actuator-src = <&actuator_cam5>;
+		cam_vio-supply = <&L15A>;
+		regulator-names = "cam_vio";
+		power-domains = <&gcc GCC_CAMSS_TOP_GDSC>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <4000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk0_active
+		                &cam_sensor_active_rst0>;
+		pinctrl-1 = <&cam_sensor_mclk0_suspend
+		                &cam_sensor_suspend_rst0>;
+		gpios = <&tlmm 34 0>,
+			<&tlmm 32 0>,
+			<&tlmm 144 0>;
+		gpio-reset = <1>;
+		gpio-custom1 = <2>;
+		gpio-req-tbl-num = <0 1 2>;
+		gpio-req-tbl-flags   	 = <1 0 0>;
+		gpio-req-tbl-label = "CAM_MCLK5",
+		                       "CAMIF_RESET5",
+		                         "CAM_CUSTOM5";
+		cci-master = <0>;
+		clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <19200000>;
+		status = "ok";
+	};
+
 };
 
