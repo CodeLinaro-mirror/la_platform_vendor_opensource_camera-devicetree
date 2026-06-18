@@ -9,3 +9,4 @@ dtbo-y += lahaina-camera-sensor-mtp.dtbo
 dtbo-y += lahaina-camera-sensor-qrd.dtbo
 dtbo-y += lahaina-camera-sensor-hdk.dtbo
 dtbo-y += lahaina-camera-sensor-hhg.dtbo
+dtbo-y += yupik-camera-sensor-aio-blinkii.dtbo
