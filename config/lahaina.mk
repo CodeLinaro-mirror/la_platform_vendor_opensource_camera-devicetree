@@ -3,6 +3,7 @@ dtbo-y += yupik-camera-sensor-idp.dtbo
 dtbo-y += yupik-camera-sensor-qrd.dtbo
 dtbo-y += yupik-camera-sensor-rcm.dtbo
 dtbo-y += yupik-camera-sensor-rb3-gen2.dtbo
+dtbo-y += yupik-camera-sensor-idp-controller.dtbo
 dtbo-y += lahaina-camera.dtbo
 dtbo-y += lahaina-camera-sensor-cdp.dtbo
 dtbo-y += lahaina-camera-sensor-mtp.dtbo
