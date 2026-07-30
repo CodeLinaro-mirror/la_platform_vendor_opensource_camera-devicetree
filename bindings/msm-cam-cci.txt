@@ -294,6 +294,12 @@ sensor resource.
   Definition: should contain the gpios which are used by two or more
 	cameras, and these cameras may be opened together.
 
+- gpios-shared-no-refcount
+  Usage: optional
+  Value type: <u32>
+  Definition: should contain shared gpios that should be driven directly
+	without refcount arbitration.
+
 - gpios-shared-pinctrl
   Usage: optional
   Value type: <u32>
