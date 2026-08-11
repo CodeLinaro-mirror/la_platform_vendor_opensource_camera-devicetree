@@ -9,6 +9,10 @@
 		compatible = "qcom,cam-res-mgr";
 		status = "ok";
 	};
+	intl_disp: qcom,msm-intl-disp {
+		compatible = "qcom,msm-intl-disp";
+		status = "okay";
+	};
 };
 
 &tlmm {
