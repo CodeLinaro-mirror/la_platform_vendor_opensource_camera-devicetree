@@ -203,7 +203,7 @@
 		status = "ok";
 	};
 
-	/* IMX686 csi0 30 pin */
+	/* IMX676 csi0 30 pin */
 	qcom,cam-sensor9 {
 		cell-index = <9>;
 		compatible = "qcom,cam-sensor";
@@ -225,12 +225,18 @@
 		pinctrl-1 = <&cam_sensor_mclk0_suspend
 				 &cam_sensor_suspend_rst0>;
 		gpios = <&tlmm 65 0>,
-			<&tlmm 8 0>;
+			<&tlmm 8 0>,
+			<&expander2 0 0>,
+			<&expander3 0 0>;
 		gpio-reset = <1>;
-		gpio-req-tbl-num = <0 1>;
-		gpio-req-tbl-flags = <1 0>;
+		gpio-custom1 = <2>;
+		gpio-custom2 = <3>;
+		gpio-req-tbl-num = <0 1 2 3>;
+		gpio-req-tbl-flags = <1 0 0 0>;
 		gpio-req-tbl-label = "CAMIF_MCLK0",
-					"CAM_RESET0";
+					"CAM_RESET0",
+					"CAM_CUSTOM1",
+					"CAM_CUSTOM2";
 		cci-master = <CCI_MASTER_0>;
 		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK0_CLK>;
 		clock-names = "cam_clk";
@@ -239,7 +245,7 @@
 		status = "ok";
 	};
 
-	/* IMX686 csi1 30 pin */
+	/* IMX676 csi1 30 pin */
 	qcom,cam-sensor10 {
 		cell-index = <10>;
 		compatible = "qcom,cam-sensor";
@@ -261,12 +267,18 @@
 		pinctrl-1 = <&cam_sensor_mclk1_suspend
 				 &cam_sensor_suspend_rst1>;
 		gpios = <&tlmm 66 0>,
-			<&tlmm 9 0>;
+			<&tlmm 9 0>,
+			<&expander2 1 0>,
+			<&expander3 1 0>;
 		gpio-reset = <1>;
-		gpio-req-tbl-num = <0 1>;
-		gpio-req-tbl-flags = <1 0>;
+		gpio-custom1 = <2>;
+		gpio-custom2 = <3>;
+		gpio-req-tbl-num = <0 1 2 3>;
+		gpio-req-tbl-flags = <1 0 0 0>;
 		gpio-req-tbl-label = "CAMIF_MCLK1",
-					"CAM_RESET1";
+					"CAM_RESET1",
+					"CAM_CUSTOM1",
+					"CAM_CUSTOM2";
 		cci-master = <CCI_MASTER_1>;
 		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK1_CLK>;
 		clock-names = "cam_clk";
@@ -275,6 +287,134 @@
 		status = "ok";
 	};
 
+	/* GMSL deserializer 0 */
+	qcom,cam-gmsl-deserializer0 {
+		cell-index = <13>;
+		csiphy-sd-index = <0>;
+		cam_vio-supply = <&vreg_campin>;
+		regulator-names = "cam_vio";
+		cam_clk-supply = <&cam_cc_titan_top_gdsc>;
+		rgltr-cntrl-support;
+		pwm-switch;
+		rgltr-min-voltage = <1800000>;
+		rgltr-max-voltage = <1800000>;
+		rgltr-load-current = <120000>;
+		gpio-no-mux = <0>;
+		pinctrl-names = "cam_default", "cam_suspend";
+		pinctrl-0 = <&cam_sensor_mclk0_active
+				&cam_sensor_active_rst0>;
+		pinctrl-1 = <&cam_sensor_mclk0_suspend
+				&cam_sensor_suspend_rst0>;
+		gpios = <&tlmm 8 0>,
+			<&expander2 0 0>,
+			<&expander3 0 0>;
+		gpio-reset = <0>;
+		gpio-custom1 = <1>;
+		gpio-custom2 = <2>;
+		gpio-req-tbl-num = <0 1 2>;
+		gpio-req-tbl-flags = <0 0 0>;
+		gpio-req-tbl-label = "CAM_RESET0",
+					"CAM_CUSTOM1",
+					"CAM_CUSTOM2";
+		cci-master = <CCI_MASTER_0>;
+		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK0_CLK>;
+		clock-names = "cam_clk";
+		clock-cntl-level = "nominal";
+		clock-rates = <24000000>;
+		status = "ok";
+
+		port@0 {
+			reg = <0>;
+			deser0_port0: endpoint {
+				remote-endpoint = <&gmsl_sensor0_ep>;
+			};
+		};
+
+		port@1 {
+			reg = <1>;
+			deser0_port1: endpoint {
+				remote-endpoint = <&gmsl_sensor1_ep>;
+			};
+		};
+
+		port@2 {
+			reg = <0>;
+			deser0_port2: endpoint {
+				remote-endpoint = <&gmsl_sensor2_ep>;
+			};
+		};
+
+		port@3 {
+			reg = <1>;
+			deser0_port3: endpoint {
+				remote-endpoint = <&gmsl_sensor3_ep>;
+			};
+		};
+	};
+
+	/* GMSL deserializer 0 sensor 0 */
+	qcom,cam-gmsl-sensor0 {
+		cell-index = <13>;
+		compatible = "qcom,cam-gmsl-sensor";
+		csiphy-sd-index = <0>;
+		status = "ok";
+		sensor-position-roll = <0>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
+		port {
+			gmsl_sensor0_ep: endpoint {
+				remote-endpoint = <&deser0_port0>;
+			};
+		};
+	};
+
+	/* GMSL deserializer 0 sensor 1 */
+	qcom,cam-gmsl-sensor1 {
+			cell-index = <14>;
+			compatible = "qcom,cam-gmsl-sensor";
+			csiphy-sd-index = <0>;
+			status = "ok";
+			sensor-position-roll = <0>;
+			sensor-position-pitch = <0>;
+			sensor-position-yaw = <180>;
+			port {
+				gmsl_sensor1_ep: endpoint {
+					remote-endpoint = <&deser0_port1>;
+				};
+			};
+	};
+
+	/* GMSL deserializer 0 sensor 2 */
+	qcom,cam-gmsl-sensor2 {
+			cell-index = <15>;
+			compatible = "qcom,cam-gmsl-sensor";
+			csiphy-sd-index = <0>;
+			status = "ok";
+			sensor-position-roll = <0>;
+			sensor-position-pitch = <0>;
+			sensor-position-yaw = <180>;
+			port {
+				gmsl_sensor2_ep: endpoint {
+					remote-endpoint = <&deser0_port2>;
+				};
+			};
+	};
+
+	/* GMSL deserializer 0 sensor 3 */
+	qcom,cam-gmsl-sensor3 {
+			cell-index = <16>;
+			compatible = "qcom,cam-gmsl-sensor";
+			csiphy-sd-index = <0>;
+			status = "ok";
+			sensor-position-roll = <0>;
+			sensor-position-pitch = <0>;
+			sensor-position-yaw = <180>;
+			port {
+				gmsl_sensor3_ep: endpoint {
+					remote-endpoint = <&deser0_port3>;
+				};
+			};
+	};
 
 };
 
@@ -351,7 +491,7 @@
 		status = "ok";
 	};
 
-	/* IMX686 csi2 30 pin */
+	/* IMX676 csi2 30 pin */
 	qcom,cam-sensor11 {
 		cell-index = <11>;
 		compatible = "qcom,cam-sensor";
@@ -373,12 +513,18 @@
 		pinctrl-1 = <&cam_sensor_mclk2_suspend
 			&cam_sensor_suspend_rst2>;
 		gpios = <&tlmm 67 0>,
-		  <&tlmm 11 0>;
+		  <&tlmm 11 0>,
+		  <&expander2 2 0>,
+		  <&expander3 2 0>;
 		gpio-reset = <1>;
-		gpio-req-tbl-num = <0 1>;
-		gpio-req-tbl-flags = <1 0>;
+		gpio-custom1 = <2>;
+		gpio-custom2 = <3>;
+		gpio-req-tbl-num = <0 1 2 3>;
+		gpio-req-tbl-flags = <1 0 0 0>;
 		gpio-req-tbl-label = "CAMIF_MCLK2",
-					"CAM_RESET2";
+					"CAM_RESET2",
+					"CAM_CUSTOM1",
+					"CAM_CUSTOM2";
 		cci-master = <CCI_MASTER_0>;
 		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK2_CLK>;
 		clock-names = "cam_clk";
@@ -387,7 +533,7 @@
 		status = "ok";
 	};
 
-	/* IMX686 csi3 30 pin */
+	/* IMX676 csi3 30 pin */
 	qcom,cam-sensor12 {
 		cell-index = <12>;
 		compatible = "qcom,cam-sensor";
@@ -409,12 +555,18 @@
 		pinctrl-1 = <&cam_sensor_mclk3_suspend
 					&cam_sensor_suspend_rst3>;
 		gpios = <&tlmm 68 0>,
-			<&tlmm 10 0>;
+			<&tlmm 10 0>,
+			<&expander2 3 0>,
+			<&expander3 3 0>;
 		gpio-reset = <1>;
-		gpio-req-tbl-num = <0 1>;
-		gpio-req-tbl-flags = <1 0>;
+		gpio-custom1 = <2>;
+		gpio-custom2 = <3>;
+		gpio-req-tbl-num = <0 1 2 3>;
+		gpio-req-tbl-flags = <1 0 0 0>;
 		gpio-req-tbl-label = "CAMIF_MCLK3",
-					"CAM_RESET3";
+					"CAM_RESET3",
+					"CAM_CUSTOM1",
+					"CAM_CUSTOM2";
 		cci-master = <CCI_MASTER_1>;
 		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK3_CLK>;
 		clock-names = "cam_clk";
