@@ -224,6 +224,11 @@
 };
 
 &soc {
+	hdmi_bdg_irq_handler: hdmi_bdg_irq_handler {
+		compatible = "hdmi_bdg_irq_handler";
+		hdmi_bdg_irq_pin = <&tlmm 25 0>;
+	};
+
 	dp_bdg_irq_handler: dp_bdg_irq_handler {
 		compatible = "dp_bdg_irq_handler";
 		dp_bdg_irq_pin = <&tlmm 36 0>;
