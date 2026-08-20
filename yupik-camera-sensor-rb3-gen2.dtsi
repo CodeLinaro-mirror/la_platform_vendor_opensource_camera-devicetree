@@ -14,6 +14,10 @@
 		pinctrl-0 = <&cam_sensor_active_gmsl>;
 		pinctrl-1 = <&cam_sensor_suspend_gmsl>;
 	};
+	intl_disp: qcom,msm-intl-disp {
+		compatible = "qcom,msm-intl-disp";
+		status = "okay";
+	};
 };
 &tlmm {
 	cam_sensor_active_rst5: cam_sensor_active_rst5 {

@@ -11,6 +11,18 @@
 	};
 };
 
+&qupv3_se2_i2c_active {
+	config {
+		drive-strength = <8>;
+	};
+};
+
+&qupv3_se2_i2c_sleep {
+	config {
+		drive-strength = <8>;
+	};
+};
+
 &tlmm {
 		cam_sensor_active_rst7911: cam_sensor_active_rst7911 {
 			/* RESET 7911 */
@@ -69,12 +81,71 @@
 				output-low;
 			};
 		};
+		cam_sensor_active_pwr3p37911: cam_sensor_active_pwr3p37911 {
+			/* power3.3 7911 */
+			mux {
+				pins = "gpio90";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio90";
+				bias-pull-up; /* No PULL */
+				drive-strength = <2>; /* 2 MA */
+				output-low;
+			};
+		};
+
+		cam_sensor_suspend_pwr3p37911: cam_sensor_suspend_pwr3p37911 {
+			/* RESET 7911 */
+			mux {
+				pins = "gpio90";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio90";
+				bias-pull-down; /* PULL DOWN */
+				drive-strength = <2>; /* 2 MA */
+				output-low;
+			};
+		};
+
+		cam_sensor_active_pwr1p17911: cam_sensor_active_pwr1p17911 {
+			/* power3.3 7911 */
+			mux {
+				pins = "gpio39";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio39";
+				bias-pull-up;  /* No PULL */
+				drive-strength = <2>; /* 2 MA */
+				output-low;
+			};
+		};
+
+		cam_sensor_suspend_pwr1p17911: cam_sensor_suspend_pwr1p17911 {
+			/* RESET 7911 */
+			mux {
+				pins = "gpio39";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio39";
+				bias-pull-down; /* PULL DOWN */
+				drive-strength = <2>; /* 2 MA */
+				output-low;
+			};
+		};
 };
 
 /*lt6911uxc-hdmi*/
 &qupv3_se1_i2c {
 	status = "ok";
-	lt6911: lt,lt6911@56 {
+	lt6911: lt,lt6911@2b {
 		compatible = "lt,lt6911uxc";
 		reg = <0x2b>;
 		cell-index = <0>;
@@ -135,8 +206,8 @@
 					 &cam_sensor_suspend_rst7911>;
 		gpios = <&tlmm 37 0>, <&tlmm 39 0>, <&tlmm 90 0>;
 		gpio-reset = <0>;
-        	gpio-standby = <1>;
-        	gpio-custom1 = <2>;
+		gpio-standby = <1>;
+		gpio-custom1 = <2>;
 		gpio-req-tbl-num = <0 1 2>;
 		gpio-req-tbl-flags = <0 1 2>;
 		gpio-req-tbl-label = "CAM_RESET3", "CAM_STANDBY", "CAM_CUSTOM1";
