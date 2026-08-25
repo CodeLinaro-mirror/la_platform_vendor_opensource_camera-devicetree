@@ -9,6 +9,10 @@
 		compatible = "qcom,cam-res-mgr";
 		status = "ok";
 	};
+	intl_disp: qcom,msm-intl-disp {
+		compatible = "qcom,msm-intl-disp";
+		status = "okay";
+	};
 };
 
 &qupv3_se2_i2c_active {

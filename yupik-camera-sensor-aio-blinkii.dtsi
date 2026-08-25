@@ -10,6 +10,11 @@
 		status = "ok";
 	};
 
+	intl_disp: qcom,msm-intl-disp {
+		compatible = "qcom,msm-intl-disp";
+		status = "okay";
+	};
+
 	camera0_vana_ldo: gpio-regulator@3 {
 		compatible = "regulator-fixed";
 		reg = <0x03 0x00>;
