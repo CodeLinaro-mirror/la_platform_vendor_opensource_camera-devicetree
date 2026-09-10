@@ -1,0 +1,24 @@
+
+// SPDX-License-Identifier: BSD-3-Clause
+
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/clock/qcom,gcc-sun.h>
+#include <dt-bindings/clock/qcom,camcc-sun.h>
+#include <dt-bindings/clock/qcom,cambistmclkcc-sun.h>
+#include <dt-bindings/interconnect/qcom,sun.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
+
+#include "sun-camera-sensor-iot-vc.dtsi"
+/ {
+	model = "Qualcomm Technologies, Inc. Sun IoT VC";
+	compatible = "qcom,sun-hdk", "qcom,sunp", "qcom,hdk";
+	qcom,msm-id = <705 0x10000>, <705 0x20000>, <0x10002c1 0x10000>, <0x10002c1 0x20000>;
+	qcom,board-id = <0x1001f 0x01>;
+};

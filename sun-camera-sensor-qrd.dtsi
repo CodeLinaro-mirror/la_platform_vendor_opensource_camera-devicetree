@@ -53,6 +53,7 @@
 	qcom,cam-res-mgr {
 		compatible = "qcom,cam-res-mgr";
 		status = "ok";
+		gpios-shared-no-refcount = <640>;
 	};
 };
 
