@@ -291,9 +291,6 @@
 	qcom,cam-gmsl-deserializer0 {
 		cell-index = <13>;
 		csiphy-sd-index = <0>;
-		sensor-position-roll = <0>;
-		sensor-position-pitch = <0>;
-		sensor-position-yaw = <180>;
 		cam_vio-supply = <&vreg_campin>;
 		regulator-names = "cam_vio";
 		cam_clk-supply = <&cam_cc_titan_top_gdsc>;
@@ -361,6 +358,9 @@
 		compatible = "qcom,cam-gmsl-sensor";
 		csiphy-sd-index = <0>;
 		status = "ok";
+		sensor-position-roll = <0>;
+		sensor-position-pitch = <0>;
+		sensor-position-yaw = <180>;
 		port {
 			gmsl_sensor0_ep: endpoint {
 				remote-endpoint = <&deser0_port0>;
@@ -374,6 +374,9 @@
 			compatible = "qcom,cam-gmsl-sensor";
 			csiphy-sd-index = <0>;
 			status = "ok";
+			sensor-position-roll = <0>;
+			sensor-position-pitch = <0>;
+			sensor-position-yaw = <180>;
 			port {
 				gmsl_sensor1_ep: endpoint {
 					remote-endpoint = <&deser0_port1>;
@@ -387,6 +390,9 @@
 			compatible = "qcom,cam-gmsl-sensor";
 			csiphy-sd-index = <0>;
 			status = "ok";
+			sensor-position-roll = <0>;
+			sensor-position-pitch = <0>;
+			sensor-position-yaw = <180>;
 			port {
 				gmsl_sensor2_ep: endpoint {
 					remote-endpoint = <&deser0_port2>;
@@ -400,6 +406,9 @@
 			compatible = "qcom,cam-gmsl-sensor";
 			csiphy-sd-index = <0>;
 			status = "ok";
+			sensor-position-roll = <0>;
+			sensor-position-pitch = <0>;
+			sensor-position-yaw = <180>;
 			port {
 				gmsl_sensor3_ep: endpoint {
 					remote-endpoint = <&deser0_port3>;
